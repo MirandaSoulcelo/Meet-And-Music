@@ -1,45 +1,43 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { AuthService } from '../service/auth.service';  // Certifique-se de importar o AuthService
-import { LoginComponent } from './login/login.component'; // Importe o componente de login
+import { AuthService } from '../service/auth.service';
+import { FormsModule } from '@angular/forms'; // IMPORTANTE: FormsModule precisa ser importado!
+import { NgFor, NgIf } from '@angular/common'; // Necessário para estruturar HTML
+import { RouterOutlet, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, LoginComponent], // Adicione LoginComponent aqui
-  template: `
-    <div *ngIf="!isAuthenticated">
-      <app-login></app-login> <!-- Exibe o componente de login -->
-    </div>
-    <div *ngIf="isAuthenticated">
-      <h1>{{ data?.message }}</h1>
-      <ul>
-        <li *ngFor="let item of data?.data">{{ item }}</li>
-      </ul>
-    </div>
-  `,
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  imports: [FormsModule, NgFor, NgIf, RouterOutlet, RouterModule] // Aqui adicionamos o FormsModule
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   data: any;
   isAuthenticated = false;
+
+  user = {
+    name: '',
+    email: '',
+    password: ''
+  };
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit() {
-    // Verificar se o token está armazenado
+    // Verificar se o token existe e é válido
     const token = localStorage.getItem('token');
-    this.isAuthenticated = token ? true : false;
+    this.isAuthenticated = !!token;
 
     if (this.isAuthenticated) {
-      // Se o usuário estiver autenticado, busque os dados da API
-      this.http.get('http://localhost:8000/users')
+      // Buscar os dados dos usuários caso autenticado
+      this.http.get('http://127.0.0.1:8000/api')
         .subscribe(response => {
           this.data = response;
           console.log(this.data);
         });
     }
   }
+
+
 }

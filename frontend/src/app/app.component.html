@@ -1,20 +1,9 @@
-<mat-toolbar color="primary" style="position: fixed; width: 100%; top: 0; z-index: 1000;">
-  <mat-toolbar-row>
-    <span>Meet&Music</span>
-  </mat-toolbar-row>
-</mat-toolbar>
+<!-- app.component.html -->
+<nav>
+  <a routerLink="/">Home</a>
+  <a routerLink="/users">Cadastro</a>
+  <a routerLink="/users/list">Lista de Usuários</a>
+</nav>
 
-<!-- Conteúdo abaixo da toolbar, com o ajuste para evitar sobreposição -->
-<div style="margin-top: 64px;">
-  <router-outlet></router-outlet>
-</div>
-
-
-<div>
-  <h2>Login</h2>
-  <form (ngSubmit)="login()">
-    <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
-    <input type="password" [(ngModel)]="password" name="password" placeholder="Senha" required />
-    <button type="submit">Entrar</button>
-  </form>
-</div>
+<!-- Somente um router-outlet -->
+<router-outlet></router-outlet>

@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+/*import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
-import { UserRoutingModule } from './user-routing.module';
-
+import { FormsModule } from '@angular/forms';  // Importando o FormsModule para usar [(ngModel)]
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
   imports: [
-    CommonModule,
-    UserRoutingModule
-  ]
+    BrowserModule,  // Certifique-se de que o BrowserModule está importado
+    FormsModule,    // Importando FormsModule
+  ],
+  providers: [],
+
 })
-export class UserModule { }
+export class AppModule {}
+*/

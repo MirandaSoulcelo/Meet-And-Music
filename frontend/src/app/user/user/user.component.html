@@ -1,1 +1,13 @@
-<p>user works!</p>
+<h2>Cadastro de Usuário</h2>
+<form (ngSubmit)="submitForm()">
+  <label>Nome:</label>
+  <input type="text" [(ngModel)]="user.name" name="name" required>
+
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="user.email" name="email" required>
+
+  <label>Senha:</label>
+  <input type="password" [(ngModel)]="user.password" name="password" required>
+
+  <button type="submit">Cadastrar</button>
+</form>
