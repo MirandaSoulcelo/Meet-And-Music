@@ -22,11 +22,13 @@ class UserController extends Controller
     }
 
 
+
     public function login()
     {
 
         return view('login'); // Passa os usuários para a view
     }
+
 
     public function store(Request $request)
     {
@@ -46,7 +48,10 @@ class UserController extends Controller
             ]);
 
 
+
             return redirect()->route('users.index')->with('success', 'Usuário Criado com sucesso!');
+
+
         } catch (\Exception $e) {
             // Captura qualquer erro e retorna com mensagem personalizada
             return response()->json(['error' => 'Erro ao criar o usuário: ' . $e->getMessage()], 500);
