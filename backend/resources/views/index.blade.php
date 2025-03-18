@@ -8,10 +8,16 @@
 <body>
     <h1>Lista de Usuários</h1>
 
-    <!-- Mensagem de sucesso após criação -->
+
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">
+       <p style="color: red;"> {{ session('error') }}</p>
+    </div>
+@endif
 
     <!-- Tabela de Usuários -->
     <table border="1">

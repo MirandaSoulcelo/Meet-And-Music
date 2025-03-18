@@ -53,8 +53,8 @@ class UserController extends Controller
 
 
         } catch (\Exception $e) {
-            // Captura qualquer erro e retorna com mensagem personalizada
-            return response()->json(['error' => 'Erro ao criar o usuário: ' . $e->getMessage()], 500);
+
+            return redirect()->route('users.index')->with('error', 'Erro ao criar o usuário: ' . $e->getMessage());
         }
     }
 
