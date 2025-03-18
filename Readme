@@ -1,0 +1,5 @@
+Importante ressaltar a importância de instalar as dependências, configurar arquivo php.ini na parte de extensões
+Utilizar a versão mais recente do php, havendo a possibilidade de mexer nas variáveis de ambiente do sistema
+para funcionar tanto o driver do mysql, quanto as extensões do php.
+
+instalar composer, etc. Readme extremamente provisório que fiz no serviço.
