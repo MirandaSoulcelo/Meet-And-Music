@@ -8,6 +8,8 @@
 <body>
     <h1>Criação de Usuário</h1>
 
+   
+
     <!-- Mensagem de sucesso após criação -->
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>

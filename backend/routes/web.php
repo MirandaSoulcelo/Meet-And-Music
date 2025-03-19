@@ -11,16 +11,17 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 
 
 
+Route::middleware('auth')->group(function(){
+    Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
 
-Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
 
+    // Exibe o formulário de criação de usuário
+    Route::get('/usercreate', [UserController::class, 'create'])->name('user.create');
 
-// Exibe o formulário de criação de usuário
-Route::get('/usercreate', [UserController::class, 'create'])->name('user.create');
+    // Envia os dados do formulário e cria o usuário no banco
+    Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
 
-// Envia os dados do formulário e cria o usuário no banco
-Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
-
+});
 
 
 Route::middleware('auth')->group(function(){
@@ -42,7 +43,7 @@ Route::get('/', [HomemController::class, 'index'])->name('home');
 
 Route::controller(LoginController::class)->group(function()
 {
-    Route::get('/loginhome', 'index')->name('login.index');
+    Route::get('/loginhome', 'index')->name('login');
     Route::post('/login', 'store')->name('login.store');
     Route::get('/logout', 'destroy')->name('login.destroy');
 });

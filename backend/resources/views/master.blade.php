@@ -12,7 +12,7 @@
         Welcome {{ auth()->user()->name}} |<a href=" {{ route('login.destroy') }}">Logout</a>
     @else
 
-        <a href="{{route('login.index')}}">Login</a>
+        <a href="{{route('login')}}">Login</a>
 
     @endif
 
