@@ -8,6 +8,12 @@
 <body>
     <h1>Editar Usuário</h1>
 
+    
+    @if (!auth()->check())
+    <script>window.location.href = "{{ route('login.index') }}";</script>
+    @endif
+
+
     <form action="{{ route('user.update', $user->id) }}" method="POST">
         @csrf
         @method('PUT')  <!-- Método PUT para atualizar o usuário -->

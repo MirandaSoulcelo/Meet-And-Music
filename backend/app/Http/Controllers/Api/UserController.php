@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -60,8 +61,13 @@ class UserController extends Controller
 
         public function edit($id)
     {
-        $user = User::findOrFail($id);  // Encontra o usuário pelo ID
-        return view('useredit', compact('user'));  // Retorna a view de edição com os dados do usuário
+        if(!Auth::check()){
+            return redirect()->route('login.index')->with('error', 'você precisa estar logado');
+
+        }
+
+        $user = User::findOrFail($id);
+        return view('useredit', compact('user'));  // Retorna a view de edição com os dados do
     }
 
         public function update(Request $request, $id)

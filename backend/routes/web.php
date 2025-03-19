@@ -23,13 +23,15 @@ Route::post('/usercreate', [UserController::class, 'store'])->name('user.store')
 
 
 
-
+Route::middleware('auth')->group(function(){
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
 
 Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+});
 
 
 //----------------------------------------------------------//

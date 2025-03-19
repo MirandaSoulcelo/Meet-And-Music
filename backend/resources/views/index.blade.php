@@ -6,7 +6,12 @@
     <title>Lista de Usuários</title>
 </head>
 <body>
+
     <h1>Lista de Usuários</h1>
+    
+    @if (!auth()->check())
+    <script>window.location.href = "{{ route('login.index') }}";</script>
+    @endif
 
 
     @if (session('success'))
