@@ -7,7 +7,18 @@
 </head>
 <body>
     <div>
-    @yield('content')
+
+    @if(auth()->check())
+        Welcome {{ auth()->user()->name}} |<a href=" {{ route('login.destroy') }}">Logout</a>
+    @else
+
+        <a href="{{route('login.index')}}">Login</a>
+
+    @endif
+
+
+
+        @yield('content')
     </div>
 </body>
 </html>
