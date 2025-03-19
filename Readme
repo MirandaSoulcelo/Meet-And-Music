@@ -3,3 +3,7 @@ Utilizar a versão mais recente do php, havendo a possibilidade de mexer nas var
 para funcionar tanto o driver do mysql, quanto as extensões do php.
 
 instalar composer, etc. Readme extremamente provisório que fiz no serviço.
+
+
+
+nota:  git push --set-upstream origin feature/user na hora que for commitar para sua branch antes de trocar para a master
