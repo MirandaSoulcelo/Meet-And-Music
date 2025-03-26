@@ -41,4 +41,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed', // Usado para garantir que o password será tratado como um valor 'hashed'
     ];
+        public function xp()
+    {
+        return $this->hasOne(User_xp::class, 'user_id');
+    }
+
+
+    public static function boot()
+{
+    parent::boot();
+
+    static::created(function ($user) {
+        User_xp::create([
+            'user_id' => $user->id,
+            'xp_atual' => 0,
+            'nivel_atual' => 1,
+        ]);
+    });
+}
+
 }
