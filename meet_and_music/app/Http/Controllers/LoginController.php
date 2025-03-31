@@ -55,13 +55,13 @@ class LoginController extends Controller
 
      Auth::loginUsingId(($user->id));
 
-     return redirect()->route('login.index')->with('succes', 'Logado');
+     return redirect()->route('home')->with('success', 'Logado com sucesso!');
    }
 
    public function destroy()
    {
         Auth::logout();
 
-        return redirect()->route('login.index');
+        return redirect()->route('login')->with('success', 'Deslogado com sucesso!');
    }
 }

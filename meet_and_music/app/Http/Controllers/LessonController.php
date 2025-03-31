@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class LessonController extends Controller
+{
+    private $lessons = [
+        1 => [
+            'id' => 1,
+            'title' => 'Introdução à Guitarra',
+            'description' => 'Aprenda os fundamentos da guitarra e comece a tocar suas primeiras músicas.',
+            'level' => 'Iniciante',
+            'duration' => '4 horas',
+            'lessons_count' => 10,
+            'image' => 'https://images.unsplash.com/photo-1525201548942-d8732f6617a0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            'is_locked' => false,
+            'content' => [
+                'topics' => [
+                    'Como segurar corretamente a guitarra',
+                    'Postura adequada para tocar',
+                    'Nomes das cordas e afinação básica',
+                    'Primeiros acordes (Lá menor, Mi maior, Ré maior)',
+                    'Exercícios práticos para iniciantes'
+                ],
+                'next_lessons' => [
+                    [
+                        'title' => 'Acordes Básicos',
+                        'status' => 'next',
+                        'icon' => 'guitar'
+                    ],
+                    [
+                        'title' => 'Ritmos Simples',
+                        'status' => 'locked',
+                        'icon' => 'music'
+                    ]
+                ]
+            ]
+        ],
+        2 => [
+            'id' => 2,
+            'title' => 'Teoria Musical Básica',
+            'description' => 'Entenda os conceitos fundamentais da teoria musical.',
+            'level' => 'Intermediário',
+            'duration' => '6 horas',
+            'lessons_count' => 8,
+            'image' => 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            'is_locked' => false
+        ],
+        3 => [
+            'id' => 3,
+            'title' => 'Ritmos Avançados',
+            'description' => 'Domine padrões rítmicos complexos e polirritmia.',
+            'level' => 'Avançado',
+            'duration' => '8 horas',
+            'lessons_count' => 12,
+            'image' => 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            'is_locked' => true
+        ]
+    ];
+
+    public function index()
+    {
+        return view('lessons.index', [
+            'lessons' => $this->lessons,
+            'total_lessons' => count($this->lessons)
+        ]);
+    }
+
+    public function show($id)
+    {
+        if (!isset($this->lessons[$id])) {
+            abort(404);
+        }
+
+        $lesson = $this->lessons[$id];
+        
+        // Simulando progresso do usuário
+        $progress = [
+            'percentage' => 30,
+            'status' => 'Em andamento'
+        ];
+
+        return view('lessons.show', [
+            'lesson' => $lesson,
+            'progress' => $progress
+        ]);
+    }
+
+    public function complete(Request $request, $id)
+    {
+        if (!isset($this->lessons[$id])) {
+            abort(404);
+        }
+
+        // Aqui você implementará a lógica para marcar uma lição como concluída
+        // Por exemplo, atualizar o progresso do usuário no banco de dados
+
+        return redirect()->back()->with('success', 'Lição concluída com sucesso!');
+    }
+} 

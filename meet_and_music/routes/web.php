@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomemController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LessonController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -15,16 +17,17 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
-
-
-    // Exibe o formulário de criação de usuário
-    Route::get('/usercreate', [UserController::class, 'create'])->name('user.create');
-
-    // Envia os dados do formulário e cria o usuário no banco
-    Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
-
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    
+    // Rotas para lições
+    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
+    Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
 });
 
+// Rotas de cadastro de usuário (fora do middleware de autenticação)
+Route::get('/usercreate', [UserController::class, 'create'])->name('user.create');
+Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
 
 Route::middleware('auth')->group(function(){
 Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
@@ -45,7 +48,7 @@ Route::get('/', [HomemController::class, 'index'])->name('home');
 
 Route::controller(LoginController::class)->group(function()
 {
-    Route::get('/loginhome', 'index')->name('login');
+    Route::get('/login', 'index')->name('login');
     Route::post('/login', 'store')->name('login.store');
     Route::get('/logout', 'destroy')->name('login.destroy');
 });
