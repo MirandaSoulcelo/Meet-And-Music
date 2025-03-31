@@ -1,7 +1,18 @@
 # Projeto Meet and Music
 
 ## 📜 Escopo do Projeto
-Este projeto tem como objetivo desenvolver uma aplicação que permite a interação entre usuários, com funcionalidades de login, cadastro e gerenciamento de lições. O foco é garantir uma experiência fluida e intuitiva para os usuários.
+*Meet & Music* é uma plataforma web que conecta músicos de diferentes níveis — do iniciante ao avançado — por meio de trilhas de aprendizado gamificadas e desafios interativos. A proposta é tornar o aprendizado musical mais dinâmico, acessível e colaborativo, permitindo que usuários pratiquem juntos e compartilhem experiências.
+
+### 🎯 Funcionalidades Principais
+
+- *Trilhas de aprendizado* para diversos instrumentos, com conteúdos interativos.
+- *Desafios musicais* para incentivar a prática e evolução dos usuários.
+- *Ranking* para estimular o progresso e engajamento na plataforma.
+- *Videochamadas entre usuários* para prática conjunta e troca de experiências.
+
+### *🚀* Objetivo
+
+Tornar o aprendizado musical mais imersivo e social, conectando músicos do mundo todo e incentivando a prática contínua de maneira envolvente.
 
 ## 🛠️ Stacks Utilizadas
 - **Backend**: Laravel (PHP)
@@ -28,7 +39,7 @@ Para garantir organização e consistência no desenvolvimento do projeto, segui
 ### 🔹 Branch de Produção
 - **`prod` (Produção)**: Esta será a versão definitiva e mais atualizada do projeto. Todas as funcionalidades aprovadas, após passarem por testes nas branches `feature/nome-do-recurso`, serão integradas na branch `prod`.
 
-🚀 Sempre que necessário, realizar um `git pull` na branch `prod` para garantir que o código esteja atualizado.
+Sempre que necessário, realizar um `git pull` na branch `prod` para garantir que o código esteja atualizado.
 
 ## 🚀 Como Rodar o Projeto (Utilizando Docker Compose)
 1. **Instalação de Dependências**:
