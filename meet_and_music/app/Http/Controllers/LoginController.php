@@ -61,7 +61,6 @@ class LoginController extends Controller
    public function destroy()
    {
         Auth::logout();
-
-        return redirect()->route('login')->with('success', 'Deslogado com sucesso!');
+        return redirect()->route('login.index')->with('success', 'Deslogado com sucesso!');
    }
 }
