@@ -48,14 +48,9 @@ class UserController extends Controller
                 'password' => bcrypt($validated['password']),
             ]);
 
-
-
-            return redirect()->route('users.index')->with('success', 'Usuário Criado com sucesso!');
-
-
+            return redirect()->route('login.index')->with('success', 'Usuário criado com sucesso! Por favor, faça login.');
         } catch (\Exception $e) {
-
-            return redirect()->route('users.index')->with('error', 'Erro ao criar o usuário: ' . $e->getMessage());
+            return back()->with('error', 'Erro ao criar o usuário: ' . $e->getMessage());
         }
     }
 
@@ -98,7 +93,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);  // Encontra o usuário pelo ID
         $user->delete();  // Exclui o usuário
 
-        return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso!');
+        return redirect()->route('login.index')->with('success', 'Usuário excluído com sucesso!');
     }
 
 }

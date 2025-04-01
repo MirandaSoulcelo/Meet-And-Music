@@ -41,7 +41,7 @@
                         <span class="text-gray-700 mr-4">{{ auth()->user()->name }}</span>
                         <a href="{{ route('login.destroy') }}" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium">Sair</a>
                     @else
-                        <a href="{{ route('login') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Entrar</a>
+                        <a href="{{ route('login.index') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium">Entrar</a>
                         <a href="{{ route('user.create') }}" class="ml-4 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm font-medium">Cadastrar</a>
                     @endif
                 </div>

@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\HomemController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
 use Illuminate\Auth\Events\Login;
@@ -10,10 +10,6 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Models\UsuarioXP;
 use Illuminate\Http\Request;
-
-
-
-
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
@@ -30,31 +26,17 @@ Route::get('/usercreate', [UserController::class, 'create'])->name('user.create'
 Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
 
 Route::middleware('auth')->group(function(){
-Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
-
-
-Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
+    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-//----------------------------------------------------------//
-
-Route::get('/', [HomemController::class, 'index'])->name('home');
-
-//-----------------------------//
-
-Route::controller(LoginController::class)->group(function()
-{
-    Route::get('/login', 'index')->name('login');
-    Route::post('/login', 'store')->name('login.store');
-    Route::get('/logout', 'destroy')->name('login.destroy');
-});
-
-//-------------------------------------//
-
+// Rotas de autenticação
+Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
     $user = auth()->user();  // Recupera o usuário autenticado
