@@ -16,17 +16,14 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Install PHP extensions
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
 # Set working directory
 WORKDIR /var/www/html
 
 # Copy existing application directory
 COPY . .
 
-# Install dependencies
-RUN composer install
+# Install dependencies (only if vendor directory does not exist)
+RUN if [ ! -d "vendor" ]; then curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer; fi
 
 # Generate key
 RUN php artisan key:generate
