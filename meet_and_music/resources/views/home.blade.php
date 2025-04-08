@@ -20,7 +20,10 @@
                     </div>
                 </div>
                 <div class="ml-4">
-                    <h2 class="text-lg font-medium text-gray-900">Módulo 1: Introdução à Música</h2>
+                        <a href="{{ route('lessons.show', 1) }}" class="text-lg font-medium text-blue-600 hover:underline">
+                            Módulo 1: Introdução à Música
+                        </a>
+
                     <p class="text-sm text-gray-500">Aprenda os conceitos básicos da teoria musical</p>
                 </div>
                 <div class="ml-auto">

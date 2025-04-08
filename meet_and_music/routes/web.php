@@ -10,11 +10,12 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Models\UsuarioXP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    
+
     // Rotas para lições
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
     Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
@@ -39,7 +40,8 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
-    $user = auth()->user();  // Recupera o usuário autenticado
+    /** @var \App\Models\User $user */
+    $user = $user = Auth::user();  // Recupera o usuário autenticado
 
     if (!$user) {
         return response()->json(['error' => 'Usuário não autenticado'], 401);
@@ -60,3 +62,7 @@ Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
         'nivel_atual' => $user->xp->nivel_atual
     ]);
 });
+
+Route::get('/lessons/{id}/quiz', [LessonController::class, 'quiz'])->name('lessons.quiz');
+
+Route::post('/lessons/{id}/quiz', [LessonController::class, 'submitQuiz'])->name('lessons.quiz.submit');

@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql pdo_sqlite sqlite3 mbstring exif pcntl bcmath gd
+
 
 # Set working directory
 WORKDIR /var/www/html
@@ -34,4 +35,4 @@ RUN chmod -R 775 /var/www/html/storage
 
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0"] 
+CMD ["php", "artisan", "serve", "--host=0.0.0.0"]
