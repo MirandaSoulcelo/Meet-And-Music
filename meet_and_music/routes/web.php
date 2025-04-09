@@ -31,7 +31,12 @@ Route::middleware('auth')->group(function(){
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+// Redireciona a raiz para /home
+Route::get('/', function () {
+    return redirect('/home');
+});
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Rotas de autenticação
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
