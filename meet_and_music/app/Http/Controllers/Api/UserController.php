@@ -96,5 +96,31 @@ class UserController extends Controller
         return redirect()->route('login.index')->with('success', 'Usuário excluído com sucesso!');
     }
 
+
+    public function ganharXP(Request $request)
+{
+    $user = auth()->user(); // Pega o usuário autenticado
+
+    if (!$user) {
+        return response()->json(['error' => 'Usuário não autenticado'], 401);
+    }
+
+    $xpGanho = $request->input('xp'); // Recebe a quantidade de XP
+
+    // Verifica se o usuário tem o relacionamento xp configurado
+    if (!$user->xp) {
+        return response()->json(['error' => 'XP não encontrado'], 404);
+    }
+
+    // Adiciona o XP ganho
+    $user->xp->adicionarXP($xpGanho);
+
+    return response()->json([
+        'xp_atual' => $user->xp->xp_atual,
+        'nivel_atual' => $user->xp->nivel_atual
+    ]);
+}
+
+
 }
 

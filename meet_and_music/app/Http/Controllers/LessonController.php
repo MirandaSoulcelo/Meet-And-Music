@@ -140,6 +140,24 @@ class LessonController extends Controller
         return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));
     }
 
+    public function completarLicao(Request $request, $lesson_id)
+{
+    $user = auth()->user(); // Pega o usuário autenticado
+    $lesson = Lesson::find($lesson_id); // Pega a lição com o id fornecido
+
+    if (!$lesson) {
+        return response()->json(['error' => 'Lição não encontrada'], 404);
+    }
+
+    // Aqui, você pode adicionar lógica para calcular o XP
+    // Por exemplo, cada lição completa dá 50 XP
+    $xpGanho = 50;
+    $this->ganharXP($request->merge(['xp' => $xpGanho])); // Adiciona o XP ao usuário
+
+    return response()->json(['message' => 'Lição completa! XP ganho!']);
+}
+
+
 
 
 

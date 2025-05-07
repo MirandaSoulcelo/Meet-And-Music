@@ -39,4 +39,29 @@ class QuestionController extends Controller
     {
         return $answer === $question->correct_answer;
     }
+
+
+    public function verificarResposta(Request $request, $question_id)
+{
+    $user = auth()->user(); // Pega o usuário autenticado
+
+    $question = Question::find($question_id); // Pega a questão com o id passado
+    if (!$question) {
+        return response()->json(['error' => 'Pergunta não encontrada'], 404);
+    }
+
+    // Verifica se a resposta do usuário está correta
+    $respostaCorreta = $question->resposta_correta;
+    $respostaUsuario = $request->input('resposta');
+
+    if ($respostaCorreta == $respostaUsuario) {
+        // Se a resposta estiver correta, o usuário ganha XP
+        $xpGanho = 10; // Exemplo: 10 XP por resposta correta
+        $this->ganharXP($request->merge(['xp' => $xpGanho])); // Chama o método ganharXP
+        return response()->json(['message' => 'Resposta correta! XP ganho!']);
+    }
+
+    return response()->json(['message' => 'Resposta incorreta. Tente novamente.']);
+}
+
 }

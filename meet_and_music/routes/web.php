@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\QuestionController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -66,3 +67,14 @@ Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
 Route::get('/lessons/{id}/quiz', [LessonController::class, 'quiz'])->name('lessons.quiz');
 
 Route::post('/lessons/{id}/quiz', [LessonController::class, 'submitQuiz'])->name('lessons.quiz.submit');
+
+Route::middleware('auth')->group(function() {
+    // Rota para completar a lição
+    Route::post('/lesson/{id}/complete', [LessonController::class, 'completarLicao']);
+
+    // Rota para verificar a resposta
+    Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
+
+    // Rota para ranking
+    Route::get('/ranking', [UserController::class, 'ranking']);
+});
