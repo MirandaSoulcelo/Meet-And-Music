@@ -12,6 +12,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Models\UsuarioXP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserAnswerController;
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
@@ -78,3 +79,15 @@ Route::middleware('auth')->group(function() {
     // Rota para ranking
     Route::get('/ranking', [UserController::class, 'ranking']);
 });
+
+// Armazenar a resposta de um usuário
+Route::post('/user-answers', [UserAnswerController::class, 'store']);
+
+// Exibir as respostas de um usuário específico
+Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
+
+// Calcular a pontuação de um usuário
+Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
+
+Route::get('/ranking', [UserAnswerController::class, 'getRanking']);
+
