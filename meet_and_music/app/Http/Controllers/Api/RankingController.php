@@ -17,4 +17,12 @@ class RankingController extends Controller
 
         return view('ranking', compact('ranking'));
     }
+
+
+    public function index()
+{
+    $ranking = User_xp::with('user')->orderByDesc('xp_atual')->get();
+
+    return response()->json($ranking);
+}
 }

@@ -13,6 +13,8 @@ use App\Models\UsuarioXP;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserAnswerController;
+use App\Http\Controllers\RankingController;
+
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
@@ -90,4 +92,7 @@ Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
 Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
 
 Route::get('/ranking', [UserAnswerController::class, 'getRanking']);
+
+Route::get('/ranking', [RankingController::class, 'index']);
+
 

@@ -7,13 +7,14 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\Alternative;
 use Illuminate\Http\Request;
+use App\Services\UserAnswerService;
 
 class UserAnswerController extends Controller
 {
     /**
      * Armazenar uma nova resposta do usuário.
      */
-    public function store(Request $request)
+    public function store(Request $request, UserAnswerService $service)
     {
         // Validação dos dados recebidos
         $request->validate([
@@ -33,6 +34,12 @@ class UserAnswerController extends Controller
             'alternative_id' => $request->alternative_id,
             'is_correct' => $is_correct,
         ]);
+
+        $answer = $service->storeAnswer(
+            $request->user_id,
+            $request->question_id,
+            $request->alternative_id
+        );
 
         return response()->json(['message' => 'Resposta registrada com sucesso!', 'user_answer' => $userAnswer]);
     }

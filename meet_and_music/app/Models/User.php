@@ -60,4 +60,9 @@ class User extends Authenticatable
     });
 }
 
+public function usuarioXp()
+{
+    return $this->hasOne(User_xp::class);
+}
+
 }

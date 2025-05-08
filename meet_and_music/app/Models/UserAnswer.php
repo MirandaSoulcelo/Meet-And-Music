@@ -39,4 +39,32 @@ class UserAnswer extends Model
     {
         return $this->belongsTo(Alternative::class);
     }
+
+
+    protected static function boot()
+{
+    parent::boot();
+
+    static::created(function ($userAnswer) {
+        // Só aplica XP se a resposta estiver correta
+        if ($userAnswer->is_correct) {
+            $question = $userAnswer->question;
+            $lesson = $question->lesson;
+
+            $totalQuestions = $lesson->questions()->count();
+            $xpTotal = $lesson->points;
+
+            if ($totalQuestions > 0) {
+                // XP por questão correta
+                $xpPorQuestao = intval($xpTotal / $totalQuestions);
+
+                // Atualiza o XP do usuário
+                $user = $userAnswer->user;
+                $user->xp += $xpPorQuestao;
+                $user->save();
+            }
+        }
+    });
+}
+
 }

@@ -28,4 +28,9 @@ class User_xp extends Model
     {
         return 100 * $this->nivel_atual; // Cada nível precisa de 100 XP a mais
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
