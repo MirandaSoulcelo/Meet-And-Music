@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\UserAnswer;
 use App\Models\Alternative;
-use App\Models\UsuarioXp;
+use App\Models\User_xp;
 
 class UserAnswerService
 {
@@ -30,17 +30,11 @@ class UserAnswerService
 
     protected function addXpToUser($userId, $xp)
     {
-        $xpRecord = UsuarioXp::firstOrCreate(
+        $xpRecord = User_xp::firstOrCreate(
             ['user_id' => $userId],
             ['xp_atual' => 0, 'nivel_atual' => 1]
         );
 
-        $xpRecord->xp_atual += $xp;
-
-        $novoNivel = floor($xpRecord->xp_atual / 100) + 1;
-        $xpRecord->nivel_atual = $novoNivel;
-
-        $xpRecord->save();
+        $xpRecord->adicionarXP($xp); // Atualiza o XP e o nível, e já salva no banco
     }
 }
-
