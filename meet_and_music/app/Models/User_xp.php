@@ -9,19 +9,23 @@ class User_xp extends Model
 
     protected $fillable = ['user_id', 'xp_atual', 'nivel_atual'];
 
+
+
     public function adicionarXP($xpGanho)
 {
-    $this->xp_atual += $xpGanho;  // Soma o valor do XP ao atual
+    $this->xp_atual = intval($this->xp_atual); // Força para inteiro
+    $xpGanho = intval($xpGanho);               // Força para inteiro
 
-    // Lógica para aumentar o nível
+    $this->xp_atual += $xpGanho;
+
     while ($this->xp_atual >= $this->xpNecessarioParaProximoNivel()) {
-        $this->xp_atual -= $this->xpNecessarioParaProximoNivel();  // Subtrai o XP necessário para o próximo nível
-        $this->nivel_atual++;  // Aumenta o nível
+        $this->xp_atual -= $this->xpNecessarioParaProximoNivel();
+        $this->nivel_atual++;
     }
 
-    // Salva as alterações no banco
     $this->save();
 }
+
 
 
     private function xpNecessarioParaProximoNivel()

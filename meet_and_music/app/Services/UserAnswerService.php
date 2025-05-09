@@ -28,13 +28,14 @@ class UserAnswerService
         return $answer;
     }
 
-    protected function addXpToUser($userId, $xp)
+        protected function addXpToUser($userId, $xp)
     {
         $xpRecord = User_xp::firstOrCreate(
             ['user_id' => $userId],
             ['xp_atual' => 0, 'nivel_atual' => 1]
         );
 
-        $xpRecord->adicionarXP($xp); // Atualiza o XP e o nível, e já salva no banco
+        $xpRecord->adicionarXP($xp);
     }
 }
+

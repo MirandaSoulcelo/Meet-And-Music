@@ -40,31 +40,40 @@ class UserAnswer extends Model
         return $this->belongsTo(Alternative::class);
     }
 
-
-    protected static function boot()
+protected static function boot()
 {
     parent::boot();
 
     static::created(function ($userAnswer) {
-        // Só aplica XP se a resposta estiver correta
+
+
         if ($userAnswer->is_correct) {
             $question = $userAnswer->question;
             $lesson = $question->lesson;
 
-            $totalQuestions = $lesson->questions()->count();
+            // Obtém os pontos da lição
             $xpTotal = $lesson->points;
 
-            if ($totalQuestions > 0) {
-                // XP por questão correta
-                $xpPorQuestao = intval($xpTotal / $totalQuestions);
+            // Divide os pontos entre as questões
+            $totalQuestions = $lesson->questions()->count();
+            $xpPorQuestao = $xpTotal / $totalQuestions;
 
-                // Atualiza o XP do usuário
-                $user = $userAnswer->user;
-                $user->xp += $xpPorQuestao;
-                $user->save();
+            // Atualiza o XP do usuário
+            $user = $userAnswer->user;
+            $userXp = $user->xp;
+            $userXp->xp_atual += $xpPorQuestao;
+
+            // Verifica e atualiza o nível
+            if ($userXp->xp_atual >= 100) {
+                $userXp->nivel_atual++;
+                $userXp->xp_atual = 0;
             }
+
+            // Salva as alterações
+            $userXp->save();
         }
     });
 }
 
-}
+
+    }

@@ -7,14 +7,13 @@ use App\Models\User;
 use App\Models\Question;
 use App\Models\Alternative;
 use Illuminate\Http\Request;
-use App\Services\UserAnswerService;
 
 class UserAnswerController extends Controller
 {
     /**
      * Armazenar uma nova resposta do usuário.
      */
-    public function store(Request $request, UserAnswerService $service)
+    public function store(Request $request)
     {
         // Validação dos dados recebidos
         $request->validate([
@@ -35,13 +34,31 @@ class UserAnswerController extends Controller
             'is_correct' => $is_correct,
         ]);
 
-        $answer = $service->storeAnswer(
-            $request->user_id,
-            $request->question_id,
-            $request->alternative_id
-        );
+        // Se a resposta for correta, adicionar XP
+        if ($is_correct) {
+            $this->addXpToUser($request->user_id, 10); // Ganha 10 XP por acerto
+        }
 
         return response()->json(['message' => 'Resposta registrada com sucesso!', 'user_answer' => $userAnswer]);
+    }
+
+    /**
+     * Adiciona XP ao usuário.
+     */
+    protected function addXpToUser($userId, $xp)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            // Adiciona o XP ao usuário
+            $user->xp += $xp;
+
+            // Calcula o nível com base no XP total
+            $novoNivel = floor($user->xp / 100) + 1;
+            $user->nivel_atual = $novoNivel;
+
+            // Salva a atualização do usuário
+            $user->save();
+        }
     }
 
     /**
@@ -65,13 +82,15 @@ class UserAnswerController extends Controller
         return response()->json(['score' => $correctAnswers]);
     }
 
+    /**
+     * Obter o ranking de usuários com base nas respostas corretas.
+     */
     public function getRanking()
-{
-    $ranking = User::withCount(['userAnswers' => function ($query) {
-        $query->where('is_correct', true);
-    }])->orderByDesc('user_answers_count')->get();
+    {
+        $ranking = User::withCount(['userAnswers' => function ($query) {
+            $query->where('is_correct', true);
+        }])->orderByDesc('user_answers_count')->get();
 
-    return response()->json($ranking);
-}
-
+        return response()->json($ranking);
+    }
 }

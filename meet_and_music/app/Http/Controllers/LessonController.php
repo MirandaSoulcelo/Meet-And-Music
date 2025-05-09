@@ -152,7 +152,9 @@ class LessonController extends Controller
     // Aqui, você pode adicionar lógica para calcular o XP
     // Por exemplo, cada lição completa dá 50 XP
     $xpGanho = 50;
-    $this->ganharXP($request->merge(['xp' => $xpGanho])); // Adiciona o XP ao usuário
+    if ($user->xp) {
+            $user->xp->adicionarXP($xpGanho);
+        }
 
     return response()->json(['message' => 'Lição completa! XP ganho!']);
 }
