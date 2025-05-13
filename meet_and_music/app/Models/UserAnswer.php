@@ -40,40 +40,28 @@ class UserAnswer extends Model
         return $this->belongsTo(Alternative::class);
     }
 
-protected static function boot()
-{
-    parent::boot();
-
-    static::created(function ($userAnswer) {
-
-
-        if ($userAnswer->is_correct) {
-            $question = $userAnswer->question;
-            $lesson = $question->lesson;
-
-            // Obtém os pontos da lição
-            $xpTotal = $lesson->points;
-
-            // Divide os pontos entre as questões
-            $totalQuestions = $lesson->questions()->count();
-            $xpPorQuestao = $xpTotal / $totalQuestions;
-
-            // Atualiza o XP do usuário
-            $user = $userAnswer->user;
-            $userXp = $user->xp;
-            $userXp->xp_atual += $xpPorQuestao;
-
-            // Verifica e atualiza o nível
-            if ($userXp->xp_atual >= 100) {
-                $userXp->nivel_atual++;
-                $userXp->xp_atual = 0;
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::created(function ($userAnswer) {
+            if ($userAnswer->is_correct) {
+                $question = $userAnswer->question;
+                $lesson = $question->lesson;
+    
+                // Obtém os pontos da lição
+                $xpTotal = $lesson->points ?? 100; // Fallback para 100 se não estiver definido
+    
+                // Divide os pontos entre as questões
+                $totalQuestions = $lesson->questions()->count();
+                $xpPorQuestao = $totalQuestions > 0 ? $xpTotal / $totalQuestions : $xpTotal;
+    
+                // Atualiza o XP do usuário usando o método existente
+                $user = $userAnswer->user;
+                $user->adicionarXpParaUsuario($xpPorQuestao);
             }
-
-            // Salva as alterações
-            $userXp->save();
-        }
-    });
-}
+        });
+    }
 
 
     }

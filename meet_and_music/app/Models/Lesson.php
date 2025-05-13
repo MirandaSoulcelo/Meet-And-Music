@@ -10,7 +10,7 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'level', 'duration', 'lessons_count', 'image', 'is_locked', 'content'];
+    protected $fillable = ['title', 'description', 'level', 'duration', 'lessons_count', 'image', 'is_locked', 'content', 'points'];
 
     protected $casts = [
         'is_locked' => 'boolean',

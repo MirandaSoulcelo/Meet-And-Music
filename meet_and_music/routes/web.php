@@ -96,3 +96,24 @@ Route::get('/ranking', [UserAnswerController::class, 'getRanking']);
 Route::get('/ranking', [RankingController::class, 'index']);
 
 
+
+
+
+
+
+
+
+
+Route::get('/debug-auth', function () {
+    $user = Auth::user(); // Ou JWTAuth::user() se estiver usando JWT
+
+    if (!$user) {
+        return response()->json(['error' => 'Usuário não autenticado'], 401);
+    }
+
+    return [
+        'classe_do_usuario' => get_class($user),
+        'tem_metodo_adicionarXpParaUsuario' => method_exists($user, 'adicionarXpParaUsuario'),
+    ];
+});
+

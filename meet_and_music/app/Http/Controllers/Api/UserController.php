@@ -99,7 +99,7 @@ class UserController extends Controller
 
     public function ganharXP(Request $request)
 {
-    $user = auth()->user(); // Pega o usuário autenticado
+    $user = Auth::user(); // Pega o usuário autenticado
 
     if (!$user) {
         return response()->json(['error' => 'Usuário não autenticado'], 401);

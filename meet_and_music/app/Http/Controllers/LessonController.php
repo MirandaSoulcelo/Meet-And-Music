@@ -142,7 +142,7 @@ class LessonController extends Controller
 
     public function completarLicao(Request $request, $lesson_id)
 {
-    $user = auth()->user(); // Pega o usuário autenticado
+    $user = Auth::user(); // Pega o usuário autenticado
     $lesson = Lesson::find($lesson_id); // Pega a lição com o id fornecido
 
     if (!$lesson) {

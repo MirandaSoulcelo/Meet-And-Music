@@ -13,7 +13,7 @@ class RankingController extends Controller
 {
     public function showRanking()
     {
-        $ranking = User_xp::orderBy('xp_atual', 'desc')->get();
+        $ranking = User_xp::orderBy('nivel_atual', 'desc')->get();
 
         return view('ranking', compact('ranking'));
     }
@@ -21,7 +21,7 @@ class RankingController extends Controller
 
     public function index()
 {
-    $ranking = User_xp::with('user')->orderByDesc('xp_atual')->get();
+    $ranking = User_xp::with('user')->orderByDesc('nivel_atual')->get();
 
     return response()->json($ranking);
 }
