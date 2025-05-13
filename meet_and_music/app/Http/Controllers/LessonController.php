@@ -131,7 +131,8 @@ class LessonController extends Controller
 
         // Aplica o XP
        /** @var \App\Models\User $user */
-        $user = Auth::user();
+        //$user = Auth::user();
+        $user = \App\Models\User::find(1);
         $user->xp->adicionarXP($xpGanho);
 
         return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));
@@ -154,6 +155,13 @@ class LessonController extends Controller
         }
 
     return response()->json(['message' => 'Lição completa! XP ganho!']);
+}
+
+
+    public function ShowLessons()
+{
+    $lessons = Lesson::all();
+    return response()->json($lessons);
 }
 
 

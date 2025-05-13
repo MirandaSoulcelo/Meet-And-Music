@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function(){
 
     // Rotas para lições A configurar.
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+
+    
+    Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
+   
     Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
 

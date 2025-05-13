@@ -12,20 +12,22 @@ class User_xp extends Model
 
 
     public function adicionarXP($xpGanho)
-{
-    $this->xp_atual = intval($this->xp_atual); // Força para inteiro
-    $xpGanho = intval($xpGanho);               // Força para inteiro
-
-    $this->xp_atual += $xpGanho;
-
-    while ($this->xp_atual >= $this->xpNecessarioParaProximoNivel()) {
-        $this->xp_atual -= $this->xpNecessarioParaProximoNivel();
-        $this->nivel_atual++;
+    {
+        $this->xp_atual = intval($this->xp_atual);
+        $xpGanho = intval($xpGanho);
+    
+        $this->xp_atual += $xpGanho;
+    
+        // Enquanto houver XP suficiente para subir de nível
+        while ($this->xp_atual >= $this->xpNecessarioParaProximoNivel()) {
+            $xpNecessario = $this->xpNecessarioParaProximoNivel();
+            $this->xp_atual -= $xpNecessario;
+            $this->nivel_atual++;
+        }
+    
+        $this->save();
     }
-
-    $this->save();
-}
-
+    
 
 
     private function xpNecessarioParaProximoNivel()
