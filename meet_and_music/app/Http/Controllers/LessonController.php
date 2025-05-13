@@ -106,6 +106,8 @@ class LessonController extends Controller
         return view('lessons.quiz', compact('lesson'));
     }
 
+
+
     public function submitQuiz(Request $request, $id)
     {
         $lesson = Lesson::with('questions.alternatives')->findOrFail($id);
@@ -129,34 +131,17 @@ class LessonController extends Controller
             default => 0
         };
 
-        // Aplica o XP
+       
        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        
-        $user->xp->adicionarXP($xpGanho);
+       $user = Auth::user();
+
+       $user->adicionarXpParaUsuario($xpGanho);
+
 
         return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));
     }
 
-    public function completarLicao(Request $request, $lesson_id)
-{
-    $user = Auth::user(); // Pega o usuário autenticado
-    $lesson = Lesson::find($lesson_id); // Pega a lição com o id fornecido
-
-    if (!$lesson) {
-        return response()->json(['error' => 'Lição não encontrada'], 404);
-    }
-
-    // Aqui, você pode adicionar lógica para calcular o XP
-    // Por exemplo, cada lição completa dá 50 XP
-    $xpGanho = 50;
-    if ($user->xp) {
-            $user->xp->adicionarXP($xpGanho);
-        }
-
-    return response()->json(['message' => 'Lição completa! XP ganho!']);
-}
-
+   
 
     public function ShowLessons()
 {

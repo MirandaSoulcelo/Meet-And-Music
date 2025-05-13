@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
-    // Rotas para lições A configurar.
+  
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
 
     
@@ -30,9 +30,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
 
-    Route::get('/lessons/{id}/quiz', [LessonController::class, 'quiz'])->name('lessons.quiz');
 
-    Route::post('/lessons/{id}/quiz', [LessonController::class, 'submitQuiz'])->name('lessons.quiz.submit');
 });
 
 // Rotas de cadastro de usuário (fora do middleware de autenticação)
@@ -80,7 +78,10 @@ Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
 
 Route::middleware('auth')->group(function() {
     // Rota para completar a lição
-    Route::post('/lesson/{id}/complete', [LessonController::class, 'completarLicao']);
+    Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
+
+
+    Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
     // Rota para verificar a resposta
     Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
