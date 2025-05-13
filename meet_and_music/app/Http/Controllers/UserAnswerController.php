@@ -82,15 +82,5 @@ class UserAnswerController extends Controller
         return response()->json(['score' => $correctAnswers]);
     }
 
-    /**
-     * Obter o ranking de usuários com base nas respostas corretas.
-     */
-    public function getRanking()
-    {
-        $ranking = User::withCount(['userAnswers' => function ($query) {
-            $query->where('is_correct', true);
-        }])->orderByDesc('user_answers_count')->get();
-
-        return response()->json($ranking);
-    }
+    
 }

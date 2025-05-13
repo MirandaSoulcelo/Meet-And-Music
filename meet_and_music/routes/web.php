@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuestionController;
+
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
@@ -20,10 +21,14 @@ Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
-    // Rotas para lições
+    // Rotas para lições A configurar.
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
     Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
+
+    Route::get('/lessons/{id}/quiz', [LessonController::class, 'quiz'])->name('lessons.quiz');
+
+    Route::post('/lessons/{id}/quiz', [LessonController::class, 'submitQuiz'])->name('lessons.quiz.submit');
 });
 
 // Rotas de cadastro de usuário (fora do middleware de autenticação)
@@ -67,9 +72,7 @@ Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
     ]);
 });
 
-Route::get('/lessons/{id}/quiz', [LessonController::class, 'quiz'])->name('lessons.quiz');
 
-Route::post('/lessons/{id}/quiz', [LessonController::class, 'submitQuiz'])->name('lessons.quiz.submit');
 
 Route::middleware('auth')->group(function() {
     // Rota para completar a lição
@@ -91,9 +94,8 @@ Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
 // Calcular a pontuação de um usuário
 Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
 
-Route::get('/ranking', [UserAnswerController::class, 'getRanking']);
 
-Route::get('/ranking', [RankingController::class, 'index']);
+Route::get('/ranking1', [RankingController::class, 'index']);
 
 
 

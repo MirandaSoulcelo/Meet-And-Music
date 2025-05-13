@@ -96,9 +96,6 @@ class LessonController extends Controller
             abort(404);
         }
 
-        // Aqui você implementará a lógica para marcar uma lição como concluída
-        // Por exemplo, atualizar o progresso do usuário no banco de dados
-
         return redirect()->back()->with('success', 'Lição concluída com sucesso!');
     }
 
