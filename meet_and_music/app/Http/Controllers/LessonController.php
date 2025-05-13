@@ -149,6 +149,11 @@ class LessonController extends Controller
     return response()->json($lessons);
 }
 
+public function showQuiz(Lesson $lesson)
+{
+    $questions = $lesson->questions()->with('alternatives')->get();
+    return view('lessons.quiz', compact('lesson', 'questions'));
+}
 
 
 

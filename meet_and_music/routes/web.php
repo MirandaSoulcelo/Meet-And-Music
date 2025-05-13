@@ -80,7 +80,6 @@ Route::middleware('auth')->group(function() {
     // Rota para completar a lição
     Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
 
-
     Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
     // Rota para verificar a resposta
