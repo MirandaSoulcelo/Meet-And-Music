@@ -131,8 +131,8 @@ class LessonController extends Controller
 
         // Aplica o XP
        /** @var \App\Models\User $user */
-        //$user = Auth::user();
-        $user = \App\Models\User::find(1);
+        $user = Auth::user();
+        
         $user->xp->adicionarXP($xpGanho);
 
         return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));

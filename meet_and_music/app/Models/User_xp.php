@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class User_xp extends Model
 {
-    protected $table = 'usuarios_xp';  // Especifica o nome correto da tabela
+    protected $table = 'usuarios_xp';  
 
     protected $fillable = ['user_id', 'xp_atual', 'nivel_atual'];
 

@@ -43,6 +43,7 @@ class QuestionController extends Controller
 
     public function verificarResposta(Request $request, $question_id)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user(); // Usuário autenticado
        
         $question = Question::find($question_id);
