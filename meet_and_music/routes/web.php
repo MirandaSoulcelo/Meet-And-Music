@@ -4,21 +4,33 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\QuestionController;
+
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use App\Models\UsuarioXP;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\UserAnswerController;
+use App\Http\Controllers\RankingController;
+
 
 Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    
-    // Rotas para lições
+
+  
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+
+    
+    Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
+   
     Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
     Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
+
+
 });
 
 // Rotas de cadastro de usuário (fora do middleware de autenticação)
@@ -44,7 +56,8 @@ Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
-    $user = auth()->user();  // Recupera o usuário autenticado
+    /** @var \App\Models\User $user */
+    $user = $user = Auth::user();  // Recupera o usuário autenticado
 
     if (!$user) {
         return response()->json(['error' => 'Usuário não autenticado'], 401);
@@ -65,3 +78,53 @@ Route::middleware('auth')->post('/ganhar-xp', function (Request $request) {
         'nivel_atual' => $user->xp->nivel_atual
     ]);
 });
+
+
+
+Route::middleware('auth')->group(function() {
+    // Rota para completar a lição
+    Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
+
+    Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
+
+    // Rota para verificar a resposta
+    Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
+
+    // Rota para ranking
+    Route::get('/ranking', [UserController::class, 'ranking']);
+});
+
+// Armazenar a resposta de um usuário
+Route::post('/user-answers', [UserAnswerController::class, 'store']);
+
+// Exibir as respostas de um usuário específico
+Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
+
+// Calcular a pontuação de um usuário
+Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
+
+
+Route::get('/ranking1', [RankingController::class, 'index']);
+
+
+
+
+
+
+
+
+
+
+Route::get('/debug-auth', function () {
+    $user = Auth::user(); // Ou JWTAuth::user() se estiver usando JWT
+
+    if (!$user) {
+        return response()->json(['error' => 'Usuário não autenticado'], 401);
+    }
+
+    return [
+        'classe_do_usuario' => get_class($user),
+        'tem_metodo_adicionarXpParaUsuario' => method_exists($user, 'adicionarXpParaUsuario'),
+    ];
+});
+

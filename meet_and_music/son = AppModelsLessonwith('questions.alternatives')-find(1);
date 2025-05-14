@@ -1,0 +1,9 @@
+[90m= [39m[34;4mApp\Models\Alternative[39;24m {#6292
+    [34mtext[39m: "[32mFá[39m",
+    [34mis_correct[39m: [36mfalse[39m,
+    [34mquestion_id[39m: [35m2[39m,
+    [34mupdated_at[39m: "[32m2025-04-08 23:02:12[39m",
+    [34mcreated_at[39m: "[32m2025-04-08 23:02:12[39m",
+    [34mid[39m: [35m4[39m,
+  }
+

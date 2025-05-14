@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lesson;
+use Illuminate\Support\Facades\Auth;
 
 class LessonController extends Controller
 {
@@ -75,7 +77,7 @@ class LessonController extends Controller
         }
 
         $lesson = $this->lessons[$id];
-        
+
         // Simulando progresso do usuário
         $progress = [
             'percentage' => 30,
@@ -94,9 +96,66 @@ class LessonController extends Controller
             abort(404);
         }
 
-        // Aqui você implementará a lógica para marcar uma lição como concluída
-        // Por exemplo, atualizar o progresso do usuário no banco de dados
-
         return redirect()->back()->with('success', 'Lição concluída com sucesso!');
     }
-} 
+
+    public function quiz($id)
+    {
+        $lesson = Lesson::with('questions.alternatives')->findOrFail($id);
+
+        return view('lessons.quiz', compact('lesson'));
+    }
+
+
+
+    public function submitQuiz(Request $request, $id)
+    {
+        $lesson = Lesson::with('questions.alternatives')->findOrFail($id);
+        $answers = $request->input('answers', []);
+        $acertos = 0;
+
+        foreach ($lesson->questions as $question) {
+            $selected = $answers[$question->id] ?? null;
+            $correct = $question->alternatives->where('is_correct', true)->first();
+
+            if ($correct && $selected == $correct->id) {
+                $acertos++;
+            }
+        }
+
+        // XP baseado em acertos
+        $xpGanho = match ($acertos) {
+            3 => 30,
+            2 => 20,
+            1 => 10,
+            default => 0
+        };
+
+       
+       /** @var \App\Models\User $user */
+       $user = Auth::user();
+
+       $user->adicionarXpParaUsuario($xpGanho);
+
+
+        return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));
+    }
+
+   
+
+    public function ShowLessons()
+{
+    $lessons = Lesson::all();
+    return response()->json($lessons);
+}
+
+public function showQuiz(Lesson $lesson)
+{
+    $questions = $lesson->questions()->with('alternatives')->get();
+    return view('lessons.quiz', compact('lesson', 'questions'));
+}
+
+
+
+
+}

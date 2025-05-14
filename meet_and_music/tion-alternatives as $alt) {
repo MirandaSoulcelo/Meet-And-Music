@@ -1,0 +1,72 @@
+[90m= [39m[34;4mApp\Models\Lesson[39;24m {#6222
+    [34mid[39m: [35m1[39m,
+    [34mtitle[39m: "[32mTeste de Quiz[39m",
+    [34mdescription[39m: "[32mTeste com 3 perguntas.[39m",
+    [34mlevel[39m: "[32mIniciante[39m",
+    [34mduration[39m: "[32m10 minutos[39m",
+    [34mlessons_count[39m: [35m1[39m,
+    [34mimage[39m: [36mnull[39m,
+    [34mis_locked[39m: [35m0[39m,
+    [34mcontent[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2025-04-08 23:01:20[39m",
+    [34mupdated_at[39m: "[32m2025-04-08 23:01:20[39m",
+    [34mquestions[39m: [34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6231
+      [34mall[39m: [
+        [34;4mApp\Models\Question[39;24m {#6228
+          [34mid[39m: [35m1[39m,
+          [34mlesson_id[39m: [35m1[39m,
+          [34mquestion[39m: "[32mQual é a nota mais grave?[39m",
+          [34mcreated_at[39m: "[32m2025-04-08 23:02:11[39m",
+          [34mupdated_at[39m: "[32m2025-04-08 23:02:11[39m",
+          [34malternatives[39m: [34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6237
+            [34mall[39m: [
+              [34;4mApp\Models\Alternative[39;24m {#6241
+                [34mid[39m: [35m1[39m,
+                [34mquestion_id[39m: [35m1[39m,
+                [34mtext[39m: "[32mDó[39m",
+                [34mis_correct[39m: [35m1[39m,
+                [34mcreated_at[39m: "[32m2025-04-08 23:02:11[39m",
+                [34mupdated_at[39m: "[32m2025-04-08 23:02:11[39m",
+              },
+              [34;4mApp\Models\Alternative[39;24m {#6242
+                [34mid[39m: [35m2[39m,
+                [34mquestion_id[39m: [35m1[39m,
+                [34mtext[39m: "[32mMi[39m",
+                [34mis_correct[39m: [35m0[39m,
+                [34mcreated_at[39m: "[32m2025-04-08 23:02:11[39m",
+                [34mupdated_at[39m: "[32m2025-04-08 23:02:11[39m",
+              },
+            ],
+          },
+        },
+        [34;4mApp\Models\Question[39;24m {#6230
+          [34mid[39m: [35m2[39m,
+          [34mlesson_id[39m: [35m1[39m,
+          [34mquestion[39m: "[32mQual é a nota após o Sol?[39m",
+          [34mcreated_at[39m: "[32m2025-04-08 23:02:11[39m",
+          [34mupdated_at[39m: "[32m2025-04-08 23:02:11[39m",
+          [34malternatives[39m: [34;4mIlluminate\Database\Eloquent\Collection[39;24m {#6239
+            [34mall[39m: [
+              [34;4mApp\Models\Alternative[39;24m {#6243
+                [34mid[39m: [35m3[39m,
+                [34mquestion_id[39m: [35m2[39m,
+                [34mtext[39m: "[32mLá[39m",
+                [34mis_correct[39m: [35m1[39m,
+                [34mcreated_at[39m: "[32m2025-04-08 23:02:12[39m",
+                [34mupdated_at[39m: "[32m2025-04-08 23:02:12[39m",
+              },
+              [34;4mApp\Models\Alternative[39;24m {#6244
+                [34mid[39m: [35m4[39m,
+                [34mquestion_id[39m: [35m2[39m,
+                [34mtext[39m: "[32mFá[39m",
+                [34mis_correct[39m: [35m0[39m,
+                [34mcreated_at[39m: "[32m2025-04-08 23:02:12[39m",
+                [34mupdated_at[39m: "[32m2025-04-08 23:02:12[39m",
+              },
+            ],
+          },
+        },
+      ],
+    },
+  }
+

@@ -8,56 +8,44 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed', // Usado para garantir que o password será tratado como um valor 'hashed'
+        'password' => 'hashed',
     ];
-        public function xp()
+
+    public function xp()
     {
         return $this->hasOne(User_xp::class, 'user_id');
     }
 
+    // Método para adicionar XP
+    public function adicionarXpParaUsuario($xp)
+    {
+        // Verifica se o usuário tem um registro de XP
+        $userXp = $this->xp;
 
-    public static function boot()
-{
-    parent::boot();
-
-    static::created(function ($user) {
-        User_xp::create([
-            'user_id' => $user->id,
-            'xp_atual' => 0,
-            'nivel_atual' => 1,
-        ]);
-    });
-}
-
+        if ($userXp) {
+            $userXp->adicionarXP($xp);  // Chama o método adicionarXP no modelo User_xp
+        } else {
+            // Caso não exista, cria um novo registro de XP para o usuário
+            User_xp::create([
+                'user_id' => $this->id,
+                'xp_atual' => $xp,
+                'nivel_atual' => 1,
+            ]);
+        }
+    }
 }

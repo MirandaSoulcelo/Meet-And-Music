@@ -19,7 +19,7 @@
             --text-light: rgba(255, 255, 255, 0.8);
             --border: rgba(255, 255, 255, 0.1);
         }
-
+        
         body {
             margin: 0;
             padding: 0;
@@ -28,7 +28,7 @@
             color: var(--text);
             line-height: 1.5;
         }
-
+        
         .header {
             position: fixed;
             top: 0;
@@ -40,7 +40,7 @@
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
         }
-
+        
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -48,12 +48,12 @@
             align-items: center;
             justify-content: space-between;
         }
-
+        
         .text-primary { color: var(--primary); }
         .text-secondary { color: var(--secondary); }
         .text-text { color: var(--text); }
         .text-text-light { color: var(--text-light); }
-
+        
         .floating-card {
             background: var(--surface);
             backdrop-filter: blur(12px);
@@ -62,14 +62,14 @@
             padding: 2.5rem;
             margin-bottom: 2rem;
         }
-
+        
         .hero-section {
             padding-top: 120px;
             min-height: 100vh;
             display: flex;
             align-items: center;
         }
-
+        
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -79,7 +79,7 @@
             gap: 4rem;
             align-items: center;
         }
-
+        
         .feature-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -89,7 +89,7 @@
             gap: 4rem;
             align-items: center;
         }
-
+        
         .btn {
             display: inline-flex;
             align-items: center;
@@ -100,31 +100,31 @@
             text-decoration: none;
             transition: all 0.3s ease;
         }
-
+        
         .btn-primary {
             background: linear-gradient(135deg, #FF5500, #FF8C69);
             color: white;
         }
-
+        
         .btn-outline {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid var(--border);
             color: var(--text);
         }
-
+        
         .text-5xl { font-size: 3rem; }
         .text-4xl { font-size: 2.25rem; }
         .text-xl { font-size: 1.25rem; }
         .font-bold { font-weight: 700; }
         .mb-8 { margin-bottom: 2rem; }
         .mb-6 { margin-bottom: 1.5rem; }
-
+        
         img {
             max-width: 100%;
             height: auto;
             border-radius: 24px;
         }
-
+        
         @media (max-width: 1024px) {
             .hero-content,
             .feature-content {
@@ -132,7 +132,7 @@
                 gap: 2rem;
             }
         }
-
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -165,8 +165,8 @@
                         Bem-vindo ao <span class="text-gradient">Meet & Music!</span>
                     </h1>
                     <p class="text-xl text-text-light mb-8">
-                        A plataforma inovadora que transforma o aprendizado musical em uma jornada interativa e envolvente.
-                        Aqui, você encontra trilhas de aprendizado gamificadas, desafios dinâmicos e uma comunidade vibrante
+                        A plataforma inovadora que transforma o aprendizado musical em uma jornada interativa e envolvente. 
+                        Aqui, você encontra trilhas de aprendizado gamificadas, desafios dinâmicos e uma comunidade vibrante 
                         para crescer musicalmente.
                     </p>
                     <a href="/usercreate" class="btn btn-primary">
@@ -187,7 +187,7 @@
                         Escolha Seu <span class="text-gradient">Caminho Musical</span>
                     </h2>
                     <p class="text-text-light mb-6">
-                        Explore trilhas de aprendizado para diversos instrumentos e estilos musicais.
+                        Explore trilhas de aprendizado para diversos instrumentos e estilos musicais. 
                         Com conteúdos interativos e desafios progressivos, você aprende no seu ritmo e de forma divertida.
                     </p>
                     <ul class="feature-list">
@@ -232,7 +232,7 @@
                         Entre para a <span class="text-gradient">Comunidade Global</span> de Músicos!
                     </h2>
                     <p class="text-xl text-text-light mb-8">
-                        Aprenda, pratique e se divirta com músicos de todo o mundo.
+                        Aprenda, pratique e se divirta com músicos de todo o mundo. 
                         No Meet & Music, a música é uma jornada compartilhada!
                     </p>
                     <a href="/usercreate" class="btn btn-primary">

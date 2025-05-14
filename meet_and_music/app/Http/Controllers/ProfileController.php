@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
@@ -8,10 +9,10 @@ class ProfileController extends Controller
 {
     public function show()
     {
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         
-        // Aqui você pode adicionar mais dados que deseja passar para a view
-        // como estatísticas, progresso, etc.
+ 
         
         return view('profile', [
             'user' => $user,
