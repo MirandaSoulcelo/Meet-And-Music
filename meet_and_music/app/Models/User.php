@@ -48,4 +48,28 @@ class User extends Authenticatable
             ]);
         }
     }
+
+        public function sentFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friend_user', 'user_id', 'friend_id')
+                    ->withPivot('accepted')
+                    ->withTimestamps();
+    }
+
+    public function receivedFriendRequests()
+    {
+        return $this->belongsToMany(User::class, 'friend_user', 'friend_id', 'user_id')
+                    ->withPivot('accepted')
+                    ->withTimestamps();
+    }
+
+    public function friends()
+    {
+        return User::whereHas('sentFriendRequests', function ($q) {
+                $q->where('friend_user.accepted', true);
+            })->orWhereHas('receivedFriendRequests', function ($q) {
+                $q->where('friend_user.accepted', true);
+            });
+    }
+
 }

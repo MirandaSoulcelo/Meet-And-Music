@@ -2,7 +2,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 class User_xp extends Model
 {
     protected $table = 'usuarios_xp';  
@@ -24,6 +25,9 @@ class User_xp extends Model
         $this->save();
     }
 
-
+        public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
    
 }
