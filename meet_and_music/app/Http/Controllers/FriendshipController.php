@@ -9,18 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendshipController extends Controller
 {
-    public function index()
-    {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        
-        // Modifique esta linha:
-        $friends = $user->friends;
-        // Ou alternativamente:
-        // $friends = $user->friends()->get()->all();
-        
-        return view('friends.index', compact('friends'));
-    }
+    
 
     public function sendRequest($friendId)
     {
@@ -29,14 +18,15 @@ class FriendshipController extends Controller
          $user = Auth::user(); // Usuário autenticado
         
 
-        // Prevenção: não enviar para si mesmo ou duplicar
-        if ($user->id == $friendId || $user->sentFriendRequests()->where('friend_id', $friendId)->exists()) {
-            return back()->with('error', 'Solicitação inválida ou já enviada.');
-        }
-
-        $user->sentFriendRequests()->attach($friendId);
-        return back()->with('success', 'Pedido de amizade enviado.');
-    }
+         $friends = $user->friends();
+         $pendingRequests = $user->receivedFriendRequests()->wherePivot('accepted', false)->get();
+         
+         return view('friends.index', [
+             'friends' => $friends,
+             'pendingRequests' => $pendingRequests,
+             'sentRequests' => $user->sentFriendRequests()->wherePivot('accepted', false)->get()
+         ]);
+     }
 
     public function acceptRequest($friendId)
     {
@@ -76,4 +66,32 @@ class FriendshipController extends Controller
 
     return back()->with('success', 'Solicitação rejeitada.');
 }
+
+
+    public function requests()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        
+        return view('friends.requests', [
+            'receivedRequests' => $user->receivedFriendRequests()->wherePivot('accepted', false)->get(),
+            'sentRequests' => $user->sentFriendRequests()->wherePivot('accepted', false)->get()
+        ]);
+    }
+
+        public function removeFriend(User $friend)
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->removeFriend($friend);
+        return back()->with('success', 'Amigo removido com sucesso.');
+    }
+
+    public function index()
+    {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $friends = $user->friends; // or $user->friends()->get()
+        return view('friends.index', compact('friends'));
+    }
 }

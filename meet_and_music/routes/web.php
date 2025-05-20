@@ -116,6 +116,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/friends/requests/received', [FriendshipController::class, 'receivedRequests'])->name('friends.received');
     Route::get('/friends/requests/sent', [FriendshipController::class, 'sentRequests'])->name('friends.sent');
     Route::post('/friends/reject/{friend}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
+    Route::get('/friends/requests', [FriendshipController::class, 'requests'])->name('friends.requests');
+
+    Route::delete('/friends/remove/{friend}', [FriendshipController::class, 'removeFriend'])->name('friends.remove');
+    //Route::post('/friends/accept/{friend}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
+    //Route::delete('/friends/reject/{friend}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
 
 
 });

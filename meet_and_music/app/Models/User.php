@@ -63,21 +63,14 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
-        // No modelo User.php
-    public function friends()
-    {
-        // Amigos onde o usuário enviou a solicitação e foi aceita
-        $sentFriends = $this->belongsToMany(User::class, 'friend_user', 'user_id', 'friend_id')
-            ->wherePivot('accepted', true);
-        
-        // Amigos onde o usuário recebeu a solicitação e aceitou
-        $receivedFriends = $this->belongsToMany(User::class, 'friend_user', 'friend_id', 'user_id')
-            ->wherePivot('accepted', true);
-        
-        // Unir os dois resultados
-        return $sentFriends->get()->merge($receivedFriends->get());
-    }
+// app/Models/User.php
 
+        public function friends()
+        {
+            // Exemplo para relacionamento Many-to-Many (amizades bidirecionais)
+            return $this->belongsToMany(User::class, 'friend_user', 'user_id', 'friend_id')
+                    ->withTimestamps(); // Opcional, se sua tabela tiver timestamps
+        }
     // Método para verificar se é amigo de outro usuário
     public function isFriendWith(User $user)
     {
@@ -99,5 +92,12 @@ class User extends Authenticatable
             ->where('user_id', $user->id)
             ->where('accepted', false)
             ->exists();
+    }
+
+        public function removeFriend(User $friend)
+    {
+        // Remove em ambas as direções
+        $this->sentFriendRequests()->detach($friend->id);
+        $this->receivedFriendRequests()->detach($friend->id);
     }
 }
