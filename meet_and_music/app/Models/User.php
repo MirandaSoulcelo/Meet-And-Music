@@ -63,13 +63,41 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
+        // No modelo User.php
     public function friends()
     {
-        return User::whereHas('sentFriendRequests', function ($q) {
-                $q->where('friend_user.accepted', true);
-            })->orWhereHas('receivedFriendRequests', function ($q) {
-                $q->where('friend_user.accepted', true);
-            });
+        // Amigos onde o usuário enviou a solicitação e foi aceita
+        $sentFriends = $this->belongsToMany(User::class, 'friend_user', 'user_id', 'friend_id')
+            ->wherePivot('accepted', true);
+        
+        // Amigos onde o usuário recebeu a solicitação e aceitou
+        $receivedFriends = $this->belongsToMany(User::class, 'friend_user', 'friend_id', 'user_id')
+            ->wherePivot('accepted', true);
+        
+        // Unir os dois resultados
+        return $sentFriends->get()->merge($receivedFriends->get());
     }
 
+    // Método para verificar se é amigo de outro usuário
+    public function isFriendWith(User $user)
+    {
+        return $this->friends()->contains($user);
+    }
+
+    // Método para verificar se há solicitação pendente
+    public function hasPendingFriendRequestTo(User $user)
+    {
+        return $this->sentFriendRequests()
+            ->where('friend_id', $user->id)
+            ->where('accepted', false)
+            ->exists();
+    }
+
+    public function hasPendingFriendRequestFrom(User $user)
+    {
+        return $this->receivedFriendRequests()
+            ->where('user_id', $user->id)
+            ->where('accepted', false)
+            ->exists();
+    }
 }

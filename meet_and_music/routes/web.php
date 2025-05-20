@@ -115,5 +115,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/friends/{friendId}/accept', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
     Route::get('/friends/requests/received', [FriendshipController::class, 'receivedRequests'])->name('friends.received');
     Route::get('/friends/requests/sent', [FriendshipController::class, 'sentRequests'])->name('friends.sent');
+    Route::post('/friends/reject/{friend}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
+
+
 });
 

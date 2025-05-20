@@ -12,8 +12,13 @@ class FriendshipController extends Controller
     public function index()
     {
         /** @var \App\Models\User $user */
-        $user = Auth::user(); // Usuário autenticado
-        $friends = $user->friends()->get();
+        $user = Auth::user();
+        
+        // Modifique esta linha:
+        $friends = $user->friends;
+        // Ou alternativamente:
+        // $friends = $user->friends()->get()->all();
+        
         return view('friends.index', compact('friends'));
     }
 
@@ -61,4 +66,14 @@ class FriendshipController extends Controller
         $requests = $user->sentFriendRequests()->wherePivot('accepted', false)->get();
         return view('friends.sent', compact('requests'));
     }
+
+    public function rejectRequest($friendId)
+{
+    DB::table('friend_user')
+        ->where('user_id', $friendId)
+        ->where('friend_id', Auth::id())
+        ->delete();
+
+    return back()->with('success', 'Solicitação rejeitada.');
+}
 }

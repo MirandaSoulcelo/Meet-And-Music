@@ -23,49 +23,48 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($ranking as $index => $userXp)
-                                    <tr>
-                                        <td>{{ $index + 1 }}</td>
-                                        <td>{{ $userXp->user->name ?? 'Usuário não encontrado' }}</td>
-                                        <td>{{ $userXp->nivel_atual }}</td>
-                                        <td>{{ $userXp->xp_atual }} / 100</td>
-                                        <td>
-                                            @if(Auth::check() && Auth::id() !== $userXp->user_id)
-                                                @php
-                                                    $user = Auth::user();
-                                                    $isFriend = $user->sentFriendRequests()->where('friend_id', $userXp->user_id)->where('accepted', true)->exists() || 
-                                                                $user->receivedFriendRequests()->where('user_id', $userXp->user_id)->where('accepted', true)->exists();
-                                                    $requestSent = $user->sentFriendRequests()->where('friend_id', $userXp->user_id)->where('accepted', false)->exists();
-                                                    $requestReceived = $user->receivedFriendRequests()->where('user_id', $userXp->user_id)->where('accepted', false)->exists();
-                                                @endphp
-
-                                                @if($isFriend)
-                                                    <span class="badge bg-success">Amigos</span>
-                                                @elseif($requestSent)
-                                                    <span class="badge bg-warning">Solicitação Enviada</span>
-                                                @elseif($requestReceived)
-                                                    <form action="{{ route('friends.accept', $userXp->user_id) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-success">Aceitar Solicitação</button>
-                                                    </form>
+                                    @foreach($ranking as $index => $userXp)
+                                        <tr>
+                                            <td>{{ $index + 1 }}</td>
+                                            <td>{{ $userXp->user->name ?? 'Usuário não encontrado' }}</td>
+                                            <td>{{ $userXp->nivel_atual }}</td>
+                                            <td>{{ $userXp->xp_atual }} / 100</td>
+                                            <td>
+                                                @auth
+                                                    @if(Auth::id() === $userXp->user_id)
+                                                        <span class="badge bg-secondary">Você</span>
+                                                    @else
+                                                        @php
+                                                            $currentUser = Auth::user();
+                                                            $otherUser = $userXp->user;
+                                                        @endphp
+                                                        
+                                                        @if($currentUser->isFriendWith($otherUser))
+                                                            <span class="badge bg-success">Amigos</span>
+                                                        @elseif($currentUser->hasPendingFriendRequestTo($otherUser))
+                                                            <span class="badge bg-warning">Solicitação Enviada</span>
+                                                        @elseif($currentUser->hasPendingFriendRequestFrom($otherUser))
+                                                            <form action="{{ route('friends.accept', $userXp->user_id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-success">Aceitar</button>
+                                                            </form>
+                                                            <form action="{{ route('friends.reject', $userXp->user_id) }}" method="POST" class="d-inline">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-danger">Recusar</button>
+                                                            </form>
+                                                        @else
+                                                            <form action="{{ route('friends.send', $userXp->user_id) }}" method="POST">
+                                                                @csrf
+                                                                <button type="submit" class="btn btn-sm btn-primary">Adicionar</button>
+                                                            </form>
+                                                        @endif
+                                                    @endif
                                                 @else
-                                                    <form action="{{ route('friends.send', $userXp->user_id) }}" method="POST">
-                                                        @csrf
-                                                        <button type="submit" class="btn btn-sm btn-primary">Adicionar como Amigo</button>
-                                                    </form>
-                                                @endif
-                                            @elseif(Auth::id() === $userXp->user_id)
-                                                <span class="badge bg-secondary">Você</span>
-                                            @else
-                                                <span class="text-muted">Faça login para adicionar</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">Nenhum usuário encontrado no ranking</td>
-                                    </tr>
-                                @endforelse
+                                                    <span class="text-muted">Faça login para adicionar</span>
+                                                @endauth
+                                            </td>
+                                        </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
