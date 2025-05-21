@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -63,20 +64,44 @@ class User extends Authenticatable
                     ->withTimestamps();
     }
 
-// app/Models/User.php
-
-        public function friends()
-        {
-            // Exemplo para relacionamento Many-to-Many (amizades bidirecionais)
-            return $this->belongsToMany(User::class, 'friend_user', 'user_id', 'friend_id')
-                    ->withTimestamps(); // Opcional, se sua tabela tiver timestamps
-        }
-    // Método para verificar se é amigo de outro usuário
+    public function friends()
+{
+    // Precisamos usar uma abordagem diferente que não utilize union
+    $friendIds = DB::table('friend_user')
+        ->where(function($query) {
+            $query->where('user_id', $this->id)
+                  ->where('accepted', true);
+        })
+        ->orWhere(function($query) {
+            $query->where('friend_id', $this->id)
+                  ->where('accepted', true);
+        })
+        ->select(
+            DB::raw('CASE 
+                WHEN user_id = ' . $this->id . ' THEN friend_id 
+                WHEN friend_id = ' . $this->id . ' THEN user_id 
+                END as id'
+            )
+        )
+        ->pluck('id');
+    
+    return User::whereIn('id', $friendIds);
+}
     public function isFriendWith(User $user)
-    {
-        return $this->friends()->contains($user);
-    }
-
+{
+    return DB::table('friend_user')
+        ->where(function($query) use ($user) {
+            $query->where('user_id', $this->id)
+                  ->where('friend_id', $user->id)
+                  ->where('accepted', true);
+        })
+        ->orWhere(function($query) use ($user) {
+            $query->where('user_id', $user->id)
+                  ->where('friend_id', $this->id)
+                  ->where('accepted', true);
+        })
+        ->exists();
+}
     // Método para verificar se há solicitação pendente
     public function hasPendingFriendRequestTo(User $user)
     {

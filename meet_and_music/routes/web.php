@@ -110,13 +110,18 @@ Route::get('/debug-auth', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+
+    // Em routes/web.php
+    Route::middleware(['auth'])->group(function () {
+    Route::post('/friends/send/{friendId}', [FriendshipController::class, 'sendRequest'])->name('friends.send');
+    Route::post('/friends/accept/{friendId}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
+    Route::post('/friends/reject/{friendId}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
     Route::get('/friends', [FriendshipController::class, 'index'])->name('friends.index');
-    Route::post('/friends/{friendId}', [FriendshipController::class, 'sendRequest'])->name('friends.send');
-    Route::post('/friends/{friendId}/accept', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
+    Route::get('/friends/requests', [FriendshipController::class, 'requests'])->name('friends.requests');
+});
     Route::get('/friends/requests/received', [FriendshipController::class, 'receivedRequests'])->name('friends.received');
     Route::get('/friends/requests/sent', [FriendshipController::class, 'sentRequests'])->name('friends.sent');
-    Route::post('/friends/reject/{friend}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
-    Route::get('/friends/requests', [FriendshipController::class, 'requests'])->name('friends.requests');
+    
 
     Route::delete('/friends/remove/{friend}', [FriendshipController::class, 'removeFriend'])->name('friends.remove');
     //Route::post('/friends/accept/{friend}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');

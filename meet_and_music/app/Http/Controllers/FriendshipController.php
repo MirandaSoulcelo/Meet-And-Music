@@ -12,21 +12,22 @@ class FriendshipController extends Controller
     
 
     public function sendRequest($friendId)
-    {
-
-         /** @var \App\Models\User $user */
-         $user = Auth::user(); // Usuário autenticado
-        
-
-         $friends = $user->friends();
-         $pendingRequests = $user->receivedFriendRequests()->wherePivot('accepted', false)->get();
-         
-         return view('friends.index', [
-             'friends' => $friends,
-             'pendingRequests' => $pendingRequests,
-             'sentRequests' => $user->sentFriendRequests()->wherePivot('accepted', false)->get()
-         ]);
-     }
+{
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+    
+    // Verificar se já existe uma amizade ou solicitação
+    if ($user->isFriendWith(User::find($friendId)) || 
+        $user->hasPendingFriendRequestTo(User::find($friendId)) ||
+        $user->hasPendingFriendRequestFrom(User::find($friendId))) {
+        return back()->with('error', 'Esta solicitação não pode ser enviada.');
+    }
+    
+    // Criar a solicitação de amizade (accepted = false)
+    $user->sentFriendRequests()->attach($friendId, ['accepted' => false]);
+    
+    return back()->with('success', 'Solicitação de amizade enviada.');
+}
 
     public function acceptRequest($friendId)
     {
@@ -91,7 +92,7 @@ class FriendshipController extends Controller
     {
         /** @var \App\Models\User $user */
         $user = Auth::user();
-        $friends = $user->friends; // or $user->friends()->get()
+        $friends = $user->friends()->get(); // or $user->friends()->get()
         return view('friends.index', compact('friends'));
     }
 }
