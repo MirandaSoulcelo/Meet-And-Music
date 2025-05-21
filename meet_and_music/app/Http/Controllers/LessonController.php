@@ -125,9 +125,11 @@ class LessonController extends Controller
 
         // XP baseado em acertos
         $xpGanho = match ($acertos) {
-            3 => 30,
-            2 => 20,
-            1 => 10,
+            5 => 100,
+            4 => 80,
+            3 => 60,
+            2 => 40,
+            1 => 20,
             default => 0
         };
 

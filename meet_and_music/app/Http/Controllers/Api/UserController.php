@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User_xp;  // no topo do arquivo
 
 class UserController extends Controller
 {
@@ -30,29 +31,36 @@ class UserController extends Controller
         return view('login'); // Passa os usuários para a view
     }
 
+            public function store(Request $request)
+        {
+            try {
+                // Validação dos dados recebidos
+                $validated = $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|email|unique:users,email',
+                    'password' => 'required|string|min:6',
+                ]);
 
-    public function store(Request $request)
-    {
-        try {
-            // Validação dos dados recebidos
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:6',
-            ]);
+                // Criação do novo usuário com os dados validados
+                $user = User::create([
+                    'name' => $validated['name'],
+                    'email' => $validated['email'],
+                    'password' => bcrypt($validated['password']),
+                ]);
 
-            // Criação do novo usuário com os dados validados
-            $user = User::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'password' => bcrypt($validated['password']),
-            ]);
+                // Cria o registro na tabela XP para esse usuário
+                User_xp::create([
+                    'user_id' => $user->id,
+                    'nivel_atual' => 1,
+                    'xp_atual' => 0,
+                ]);
 
-            return redirect()->route('login.index')->with('success', 'Usuário criado com sucesso! Por favor, faça login.');
-        } catch (\Exception $e) {
-            return back()->with('error', 'Erro ao criar o usuário: ' . $e->getMessage());
+                return redirect()->route('login.index')->with('success', 'Usuário criado com sucesso! Por favor, faça login.');
+            } catch (\Exception $e) {
+                return back()->with('error', 'Erro ao criar o usuário: ' . $e->getMessage());
+            }
         }
-    }
+
 
         public function edit($id)
     {
