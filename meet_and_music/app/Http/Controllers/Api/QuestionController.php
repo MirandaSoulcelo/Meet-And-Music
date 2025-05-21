@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 
 class QuestionController extends Controller
 {
+
+    /*
     public function submitAnswer(Request $request, $questionId)
     {
         // Lógica para verificar se a resposta está correta
@@ -41,9 +43,12 @@ class QuestionController extends Controller
     }
 
 
+/*
     public function verificarResposta(Request $request, $question_id)
     {
+    */
         /** @var \App\Models\User $user */
+        /*
         $user = Auth::user(); // Usuário autenticado
        
         $question = Question::find($question_id);
@@ -64,5 +69,6 @@ class QuestionController extends Controller
         return response()->json(['message' => 'Resposta incorreta. Tente novamente.']);
     }
     
+    */
 
 }

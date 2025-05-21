@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Tymon\JWTAuth\Facades\JWTAuth;
-
 use App\Models\User;
 
 class LoginController extends Controller
@@ -28,19 +26,7 @@ class LoginController extends Controller
         //'password.min'=>'esse campo precisa ter no mínimo :min caracteres'
 
     ]);
-    /*
-        $credentials = $request->only('email', 'password');
 
-        $auth = Auth::attempt($credentials);
-
-        if(!$auth)
-        {
-            return redirect()->route('login.index')->withErrors(['error'=> 'email ou senha incorretos']);
-        }
-
-
-     return redirect()->route('login.index')->with('succes', 'Logado');
-     */
 
      $user = User::where('email', $request->input('email'))->first();
 

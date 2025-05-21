@@ -62,6 +62,8 @@ class UserController extends Controller
         }
 
 
+        
+
         public function edit($id)
     {
         if(!Auth::check()){
@@ -72,6 +74,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         return view('useredit', compact('user'));  // Retorna a view de edição com os dados do
     }
+
+
+
 
         public function update(Request $request, $id)
     {
@@ -96,6 +101,8 @@ class UserController extends Controller
     }
 
 
+
+
         public function destroy($id)
     {
         $user = User::findOrFail($id);  // Encontra o usuário pelo ID
@@ -104,7 +111,7 @@ class UserController extends Controller
         return redirect()->route('login.index')->with('success', 'Usuário excluído com sucesso!');
     }
 
-
+/*
     public function ganharXP(Request $request)
 {
     $user = Auth::user(); // Pega o usuário autenticado
@@ -128,6 +135,7 @@ class UserController extends Controller
         'nivel_atual' => $user->xp->nivel_atual
     ]);
 }
+    */
 
 
 }

@@ -70,7 +70,7 @@ class LessonController extends Controller
         ]);
     }
 
-    public function show($id)
+    /*public function show($id)
     {
         if (!isset($this->lessons[$id])) {
             abort(404);
@@ -89,8 +89,8 @@ class LessonController extends Controller
             'progress' => $progress
         ]);
     }
-
-    public function complete(Request $request, $id)
+*/
+   /* public function complete(Request $request, $id)
     {
         if (!isset($this->lessons[$id])) {
             abort(404);
@@ -105,6 +105,7 @@ class LessonController extends Controller
 
         return view('lessons.quiz', compact('lesson'));
     }
+        */
 
 
 

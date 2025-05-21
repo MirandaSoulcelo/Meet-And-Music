@@ -63,9 +63,9 @@ Route::middleware('auth')->group(function() {
 
     Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
-    // Rota para verificar a resposta
+ /*
     Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
-
+    */
     
 });
 
@@ -80,8 +80,6 @@ Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
 // Calcular a pontuação de um usuário
 Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
 
-
-Route::get('/ranking1', [RankingController::class, 'index']);
 Route::get('/ranking2', [RankingController::class, 'showRanking']);
 
 
