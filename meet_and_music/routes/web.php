@@ -11,7 +11,6 @@ use App\Http\Controllers\FriendshipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UserAnswerController;
 use App\Http\Controllers\RankingController;
@@ -67,8 +66,7 @@ Route::middleware('auth')->group(function() {
     // Rota para verificar a resposta
     Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
 
-    // Rota para ranking
-    Route::get('/ranking', [UserController::class, 'ranking']);
+    
 });
 
 
@@ -112,20 +110,18 @@ Route::get('/debug-auth', function () {
 Route::middleware(['auth'])->group(function () {
 
     // Em routes/web.php
-    Route::middleware(['auth'])->group(function () {
+    
     Route::post('/friends/send/{friendId}', [FriendshipController::class, 'sendRequest'])->name('friends.send');
     Route::post('/friends/accept/{friendId}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
     Route::post('/friends/reject/{friendId}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
     Route::get('/friends', [FriendshipController::class, 'index'])->name('friends.index');
     Route::get('/friends/requests', [FriendshipController::class, 'requests'])->name('friends.requests');
-});
+
     Route::get('/friends/requests/received', [FriendshipController::class, 'receivedRequests'])->name('friends.received');
     Route::get('/friends/requests/sent', [FriendshipController::class, 'sentRequests'])->name('friends.sent');
     
 
     Route::delete('/friends/remove/{friend}', [FriendshipController::class, 'removeFriend'])->name('friends.remove');
-    //Route::post('/friends/accept/{friend}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
-    //Route::delete('/friends/reject/{friend}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
 
 
 });
