@@ -132,3 +132,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])->name('meetings.index');
     Route::get('/meeting/{meetingId}/convite', [MeetingController::class, 'gerarConvite'])->name('meeting.convite');
 });
+
+
+
+Route::get('/entrar-na-chamada', function () {
+    return view('join-call');
+})->name('video.call.form');
+
+Route::get('/entrar-na-chamada/buscar', [MeetingController::class, 'buscarChamada'])->name('video.call.join');
+
+Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])->name('video.call');

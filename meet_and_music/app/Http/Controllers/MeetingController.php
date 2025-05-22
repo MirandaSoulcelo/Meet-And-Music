@@ -61,4 +61,20 @@ class MeetingController extends Controller
             'message' => 'Link copiado!'
         ]);
     }
+
+
+        public function buscarChamada(Request $request)
+    {
+        $meetingId = $request->get('meetingId');
+
+        $meeting = Meeting::where('room_id', $meetingId)->first();
+
+        if (!$meeting) {
+            return redirect()->route('video.call.form')->withErrors('Código inválido ou reunião não encontrada.');
+        }
+
+        return redirect()->route('video.call', ['meetingId' => $meetingId]);
+    }
+
+
 }
