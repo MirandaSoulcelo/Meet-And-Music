@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\FriendshipController;
+use App\Http\Controllers\MeetingController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -124,3 +125,10 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+// Rotas de videochamada
+Route::middleware('auth')->group(function () {
+    Route::post('/meeting/criar', [MeetingController::class, 'criarChamada'])->name('meeting.criar');
+    Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])->name('video.call');
+    Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])->name('meetings.index');
+    Route::get('/meeting/{meetingId}/convite', [MeetingController::class, 'gerarConvite'])->name('meeting.convite');
+});
