@@ -125,20 +125,36 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
+
 // Rotas de videochamada
 Route::middleware('auth')->group(function () {
-    Route::post('/meeting/criar', [MeetingController::class, 'criarChamada'])->name('meeting.criar');
-    Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])->name('video.call');
-    Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])->name('meetings.index');
-    Route::get('/meeting/{meetingId}/convite', [MeetingController::class, 'gerarConvite'])->name('meeting.convite');
+    // Criar reunião
+    Route::post('/meeting/criar', [MeetingController::class, 'criarChamada'])
+         ->name('meeting.criar');
+    
+    // Entrar em reunião - FORMULÁRIO 
+    Route::get('/entrar-reuniao', [MeetingController::class, 'formEntrarReuniao'])
+         ->name('meeting.join.form');
+    
+    // Entrar em reunião - 
+    Route::post('/entrar-reuniao', [MeetingController::class, 'processarEntradaReuniao'])
+         ->name('meeting.join.process');
+    
+
+    // Acessar sala de vídeo
+    Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])
+         ->name('video.call');
+    
+    // Listar minhas reuniões
+    Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])
+         ->name('meetings.index');
+    
+    // Gerar convite
+    Route::get('/meeting/{meetingId}/convite', [MeetingController::class, 'gerarConvite'])
+         ->name('meeting.convite');
 });
 
-
-
+// Rota para formulário antigo (se ainda existir a view 'join-call')
 Route::get('/entrar-na-chamada', function () {
     return view('join-call');
 })->name('video.call.form');
-
-Route::get('/entrar-na-chamada/buscar', [MeetingController::class, 'buscarChamada'])->name('video.call.join');
-
-Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])->name('video.call');

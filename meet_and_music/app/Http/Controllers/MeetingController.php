@@ -16,7 +16,7 @@ class MeetingController extends Controller
     {
         $meetingId = Str::random(10);
         
-        // Opcional: salvar no banco
+      
         Meeting::create([
             'room_id' => $meetingId,
             'created_by' => Auth::id(),
@@ -63,18 +63,45 @@ class MeetingController extends Controller
     }
 
 
-        public function buscarChamada(Request $request)
+
+
+        /**
+     * Mostrar formulário para entrar em reunião
+     */
+    public function formEntrarReuniao()
     {
-        $meetingId = $request->get('meetingId');
-
-        $meeting = Meeting::where('room_id', $meetingId)->first();
-
-        if (!$meeting) {
-            return redirect()->route('video.call.form')->withErrors('Código inválido ou reunião não encontrada.');
-        }
-
-        return redirect()->route('video.call', ['meetingId' => $meetingId]);
+        return view('meetings.join-form');
     }
 
+    /**
+     * Processar entrada na reunião
+     */
+    public function processarEntradaReuniao(Request $request)
+    {
+        $request->validate([
+            'meeting_input' => 'required|string'
+        ]);
+
+        $input = $request->meeting_input;
+        
+        // Se for um link completo, extrair o ID
+        if (str_contains($input, 'video-call/')) {
+            $meetingId = last(explode('video-call/', $input));
+        } else {
+            // Se for apenas o código
+            $meetingId = $input;
+        }
+        
+        // Verificar se a reunião existe
+        $meeting = Meeting::where('room_id', $meetingId)->first();
+        
+        if (!$meeting) {
+            return back()->withErrors([
+                'meeting_input' => 'Reunião não encontrada. Verifique o código ou link.'
+            ])->withInput();
+        }
+        
+        return redirect()->route('video.call', $meetingId);
+    }
 
 }
