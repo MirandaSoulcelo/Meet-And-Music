@@ -13,7 +13,9 @@ class RankingController extends Controller
 {
     public function showRanking()
     {
-        $ranking = User_xp::orderBy('nivel_atual', 'desc')->get()->all();
+        $ranking = User_xp::orderBy('nivel_atual', 'desc')
+                          ->orderBy('xp_atual', 'desc')
+                          ->get();
 
         return view('ranking', compact('ranking'));
     }

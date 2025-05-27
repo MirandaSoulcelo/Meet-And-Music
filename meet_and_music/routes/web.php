@@ -50,9 +50,9 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy'
 
 
 
-
+// Rota de lições
 Route::middleware('auth')->group(function() {
-    // Rota de lições
+    
 
     //obter quiz com questões de acordo com a lição
     Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
@@ -61,8 +61,9 @@ Route::middleware('auth')->group(function() {
     //enviar respostas do usuário e fazer a lógica de xp com base em acerto
     Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
-
+    
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+    Route::get('/lessons/show', [LessonController::class, 'show'])->name('lessons.show');
 
     
     Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
@@ -73,27 +74,19 @@ Route::middleware('auth')->group(function() {
     
 });
 
-
+// Rota de Ranking
 Route::middleware('auth')->group(function() {
 
-// Armazenar a resposta de um usuário
-Route::post('/user-answers', [UserAnswerController::class, 'store']);
-
-// Exibir as respostas de um usuário específico
-//Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
-
-// Calcular a pontuação de um usuário
-//Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
 
 Route::get('/ranking', [RankingController::class, 'showRanking']);
 });
 
 
 
-
+ // Rotas relacionadas a lógica de amizade
 Route::middleware(['auth'])->group(function () {
 
-    // Em routes/web.php
+   
     
     Route::post('/friends/send/{friendId}', [FriendshipController::class, 'sendRequest'])->name('friends.send');
     Route::post('/friends/accept/{friendId}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
