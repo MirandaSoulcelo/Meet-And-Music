@@ -34,7 +34,7 @@
                                                 </form>
                                                 <form action="{{ route('friends.reject', $request->id) }}" method="POST" class="d-inline">
                                                     @csrf
-                                                    @method('DELETE')
+                                                   
                                                     <button type="submit" class="btn btn-sm btn-danger">Recusar</button>
                                                 </form>
                                             </div>

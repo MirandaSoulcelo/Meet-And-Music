@@ -22,14 +22,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
   
-    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
-
-    
-    Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
    
-    Route::get('/lessons/{id}', [LessonController::class, 'show'])->name('lessons.show');
-    Route::post('/lessons/{id}/complete', [LessonController::class, 'complete'])->name('lessons.complete');
-
 
 });
 
@@ -38,7 +31,7 @@ Route::get('/usercreate', [UserController::class, 'create'])->name('user.create'
 Route::post('/usercreate', [UserController::class, 'store'])->name('user.store');
 
 Route::middleware('auth')->group(function(){
-    Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/edit', [UserController::class, 'edit'])->name('user.edit');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 });
@@ -59,52 +52,44 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy'
 
 
 Route::middleware('auth')->group(function() {
-    // Rota para completar a lição
+    // Rota de lições
+
+    //obter quiz com questões de acordo com a lição
     Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
 
+
+    //enviar respostas do usuário e fazer a lógica de xp com base em acerto
     Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
- /*
-    Route::post('/question/{id}/verify', [QuestionController::class, 'verificarResposta']);
-    */
+
+    Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
+
+    
+    Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
+   
+   
+
+
     
 });
 
 
+Route::middleware('auth')->group(function() {
 
 // Armazenar a resposta de um usuário
 Route::post('/user-answers', [UserAnswerController::class, 'store']);
 
 // Exibir as respostas de um usuário específico
-Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
+//Route::get('/user-answers/{userId}', [UserAnswerController::class, 'show']);
 
 // Calcular a pontuação de um usuário
-Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
+//Route::get('/user-answers/{userId}/score', [UserAnswerController::class, 'calculateScore']);
 
-Route::get('/ranking2', [RankingController::class, 'showRanking']);
-
-
-
-
-
-
-
-
-
-
-
-Route::get('/debug-auth', function () {
-    $user = Auth::user(); // Ou JWTAuth::user() se estiver usando JWT
-
-    if (!$user) {
-        return response()->json(['error' => 'Usuário não autenticado'], 401);
-    }
-
-    return [
-        'classe_do_usuario' => get_class($user),
-        'tem_metodo_adicionarXpParaUsuario' => method_exists($user, 'adicionarXpParaUsuario'),
-    ];
+Route::get('/ranking', [RankingController::class, 'showRanking']);
 });
+
+
+
 
 Route::middleware(['auth'])->group(function () {
 
@@ -115,10 +100,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/friends/reject/{friendId}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
     Route::get('/friends', [FriendshipController::class, 'index'])->name('friends.index');
     Route::get('/friends/requests', [FriendshipController::class, 'requests'])->name('friends.requests');
-
-    Route::get('/friends/requests/received', [FriendshipController::class, 'receivedRequests'])->name('friends.received');
-    Route::get('/friends/requests/sent', [FriendshipController::class, 'sentRequests'])->name('friends.sent');
-    
 
     Route::delete('/friends/remove/{friend}', [FriendshipController::class, 'removeFriend'])->name('friends.remove');
 
@@ -154,7 +135,3 @@ Route::middleware('auth')->group(function () {
          ->name('meeting.convite');
 });
 
-// Rota para formulário antigo (se ainda existir a view 'join-call')
-Route::get('/entrar-na-chamada', function () {
-    return view('join-call');
-})->name('video.call.form');

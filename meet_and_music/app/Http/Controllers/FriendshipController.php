@@ -39,24 +39,7 @@ class FriendshipController extends Controller
         return back()->with('success', 'Amizade aceita.');
     }
 
-    public function receivedRequests()
-    {
 
-        /** @var \App\Models\User $user */
-        $user = Auth::user(); // Usuário autenticado
-
-        $requests = $user->receivedFriendRequests()->wherePivot('accepted', false)->get();
-        return view('friends.received', compact('requests'));
-    }
-
-    public function sentRequests()
-    {
-        /** @var \App\Models\User $user */
-        $user = Auth::user(); // Usuário autenticado
-
-        $requests = $user->sentFriendRequests()->wherePivot('accepted', false)->get();
-        return view('friends.sent', compact('requests'));
-    }
 
     public function rejectRequest($friendId)
 {
@@ -95,4 +78,44 @@ class FriendshipController extends Controller
         $friends = $user->friends()->get(); // or $user->friends()->get()
         return view('friends.index', compact('friends'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
+       /* public function receivedRequests()
+    {
+
+        /** @var \App\Models\User $user */
+    /*
+        $user = Auth::user(); // Usuário autenticado
+
+        $requests = $user->receivedFriendRequests()->wherePivot('accepted', false)->get();
+        return view('friends.received', compact('requests'));
+    }
+    */
+
+    /*
+
+    public function sentRequests()
+    {
+        /** @var \App\Models\User $user */
+        /*
+        $user = Auth::user(); // Usuário autenticado
+
+        $requests = $user->sentFriendRequests()->wherePivot('accepted', false)->get();
+        return view('friends.sent', compact('requests'));
+    }
+
+    */
 }
+
+
+

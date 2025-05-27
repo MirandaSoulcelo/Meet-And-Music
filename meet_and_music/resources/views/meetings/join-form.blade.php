@@ -52,15 +52,7 @@ document.getElementById('meeting_input').addEventListener('paste', function(e) {
                             </button>
                         </div>
                     </form>
-                    
-                    <hr class="my-4">
-                    
-                    <div class="text-center">
-                        <p class="text-muted mb-2">Ou</p>
-                        <a href="{{ route('video.call.form') }}" class="btn btn-outline-success">
-                            Criar Nova Reunião
-                        </a>
-                    </div>
+                
                 </div>
             </div>
         </div>

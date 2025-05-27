@@ -64,8 +64,10 @@ class UserController extends Controller
 
         
 
-        public function edit($id)
+        public function edit()
     {
+        $user1 = Auth::user();
+        $id = $user1->id;
         if(!Auth::check()){
             return redirect()->route('login.index')->with('error', 'você precisa estar logado');
 
@@ -80,6 +82,7 @@ class UserController extends Controller
 
         public function update(Request $request, $id)
     {
+       
         // Validação dos dados
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -97,7 +100,7 @@ class UserController extends Controller
             'password' => $validatedData['password'] ? bcrypt($validatedData['password']) : $user->password, // Se a senha for fornecida, atualiza, senão mantém a atual
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('profile.show')->with('success', 'Usuário atualizado com sucesso!');
     }
 
 
