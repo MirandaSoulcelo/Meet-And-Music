@@ -4,7 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\QuestionController;
+//use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\FriendshipController;
 use App\Http\Controllers\MeetingController;
 
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\UserAnswerController;
+//use App\Http\Controllers\UserAnswerController;
 use App\Http\Controllers\RankingController;
 
 
