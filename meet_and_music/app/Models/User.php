@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function friends()
 {
-    // Precisamos usar uma abordagem diferente que não utilize union
+    
     $friendIds = DB::table('friend_user')
         ->where(function($query) {
             $query->where('user_id', $this->id)

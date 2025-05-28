@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+/*
 class UserAnswer extends Model
 {
     use HasFactory;
@@ -19,6 +19,8 @@ class UserAnswer extends Model
     /**
      * Relacionamento com o modelo User.
      */
+
+     /*
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -27,6 +29,7 @@ class UserAnswer extends Model
     /**
      * Relacionamento com o modelo Question.
      */
+    /*
     public function question()
     {
         return $this->belongsTo(Question::class);
@@ -35,6 +38,7 @@ class UserAnswer extends Model
     /**
      * Relacionamento com o modelo Alternative (se aplicável).
      */
+    /*
     public function alternative()
     {
         return $this->belongsTo(Alternative::class);
@@ -65,3 +69,4 @@ class UserAnswer extends Model
 
 
     }
+*/

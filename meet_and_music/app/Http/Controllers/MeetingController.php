@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Auth;
 
 class MeetingController extends Controller
 {
-    /**
-     * Criar uma nova videochamada
-     */
+    
+    //Criar uma nova videochamada
+    
     public function criarChamada(Request $request)
     {
         $meetingId = Str::random(10);
@@ -26,9 +26,9 @@ class MeetingController extends Controller
         return redirect()->route('video.call', $meetingId);
     }
     
-    /**
-     * Entrar em uma videochamada
-     */
+   
+    // Entrar em uma videochamada
+    
     public function entrarChamada($meetingId)
     {
         $roomName = "meetmusic-" . $meetingId;
@@ -37,9 +37,9 @@ class MeetingController extends Controller
         return view('video-call', compact('roomName', 'meeting'));
     }
     
-    /**
-     * Listar chamadas do usuário
-     */
+    
+     //Listar chamadas do usuário
+     
     public function minhasChamadas()
     {
         $meetings = Meeting::where('created_by', Auth::id())

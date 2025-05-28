@@ -90,23 +90,6 @@ class LessonController extends Controller
         ]);
     }
 
-   /* public function complete(Request $request, $id)
-    {
-        if (!isset($this->lessons[$id])) {
-            abort(404);
-        }
-
-        return redirect()->back()->with('success', 'Lição concluída com sucesso!');
-    }
-
-    public function quiz($id)
-    {
-        $lesson = Lesson::with('questions.alternatives')->findOrFail($id);
-
-        return view('lessons.quiz', compact('lesson'));
-    }
-        */
-
 
 
     public function submitQuiz(Request $request, $id)

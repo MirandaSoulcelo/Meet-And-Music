@@ -86,8 +86,6 @@ Route::get('/ranking', [RankingController::class, 'showRanking']);
  // Rotas relacionadas a lógica de amizade
 Route::middleware(['auth'])->group(function () {
 
-   
-    
     Route::post('/friends/send/{friendId}', [FriendshipController::class, 'sendRequest'])->name('friends.send');
     Route::post('/friends/accept/{friendId}', [FriendshipController::class, 'acceptRequest'])->name('friends.accept');
     Route::post('/friends/reject/{friendId}', [FriendshipController::class, 'rejectRequest'])->name('friends.reject');
