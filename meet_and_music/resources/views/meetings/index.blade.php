@@ -24,7 +24,7 @@
                                         </small>
                                     </p>
                                     <div class="d-flex gap-2">
-                                        <a href="{{ route('video.call', $meeting->room_id) }}" 
+                                        <a href="{{ route('meeting.video.call', $meeting->room_id) }}" 
                                            class="btn btn-success btn-sm">
                                             Entrar
                                         </a>

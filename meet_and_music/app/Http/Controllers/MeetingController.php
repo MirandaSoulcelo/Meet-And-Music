@@ -34,7 +34,7 @@ class MeetingController extends Controller
         $roomName = "meetmusic-" . $meetingId;
         $meeting = Meeting::where('room_id', $meetingId)->first();
         
-        return view('video-call', compact('roomName', 'meeting'));
+        return view('meetings.video-call', compact('roomName', 'meeting'));
     }
     
     

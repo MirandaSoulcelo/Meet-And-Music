@@ -115,7 +115,7 @@ Route::middleware('auth')->group(function () {
 
     // Acessar sala de vídeo
     Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])
-         ->name('video.call');
+         ->name('meeting.video.call');
     
     // Listar minhas reuniões
     Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])
