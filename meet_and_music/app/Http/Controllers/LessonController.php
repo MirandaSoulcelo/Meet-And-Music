@@ -105,15 +105,19 @@ class LessonController extends Controller
             if ($correct && $selected == $correct->id) {
                 $acertos++;
             }
+
+           
         }
 
         // XP baseado em acertos
         $xpGanho = match ($acertos) {
-            5 => 100,
-            4 => 80,
-            3 => 60,
-            2 => 40,
-            1 => 20,
+            7 => 70,
+            6 => 60,
+            5 => 50,
+            4 => 40,
+            3 => 30,
+            2 => 20,
+            1 => 10,
             default => 0
         };
 
@@ -124,7 +128,12 @@ class LessonController extends Controller
        $user->adicionarXpParaUsuario($xpGanho);
 
 
-        return view('lessons.quiz_result', compact('lesson', 'acertos', 'xpGanho'));
+       return view('lessons.quiz_result', [
+        'acertos' => $acertos,
+        'xpGanho' => $acertos * 10, // ou outro cálculo
+        'lesson' => $lesson,
+        'answers' => $answers
+    ]);
     }
 
    

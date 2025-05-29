@@ -86,7 +86,7 @@ class FriendshipController extends Controller
                 'is_in_meeting' => $activeMeeting !== null,
                 'meeting_code' => $activeMeeting ? $activeMeeting->room_id : null,
                 'meeting_title' => $activeMeeting ? $activeMeeting->title : null,
-                'meeting_link' => $activeMeeting ? route('video.call', $activeMeeting->room_id) : null
+                'meeting_link' => $activeMeeting ? route('meeting.video.call', $activeMeeting->room_id) : null
             ];
         });
         
