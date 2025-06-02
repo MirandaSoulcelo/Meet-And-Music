@@ -63,10 +63,10 @@ Route::middleware('auth')->group(function() {
 
     
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
-    Route::get('/lessons/show', [LessonController::class, 'show'])->name('lessons.show');
+   // Route::get('/lessons/show', [LessonController::class, 'show'])->name('lessons.show');
 
     
-    Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
+    //Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
    
    
 
