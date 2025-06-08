@@ -17,7 +17,7 @@
     @endif
 
     <!-- Main Content -->
-    <main class="flex-1 @if(!request()->is('login') && !request()->is('register') && !request()->is('usercreate')) container mx-auto py-6 sm:px-6 lg:px-8 @endif">
+    <main class="flex-1">
         @if (session('success'))
             <x-alert type="success" :message="session('success')" />
         @endif
@@ -30,14 +30,7 @@
     </main>
 
     @if(!request()->is('login') && !request()->is('register') && !request()->is('usercreate'))
-        <!-- Footer -->
-        <footer class="footer fixed bottom-0 left-0 right-0 w-full z-40">
-            <div class="footer-content">
-                <div class="footer-text">
-                    &copy; 2024 Meet & Music. Todos os direitos reservados.
-                </div>
-            </div>
-        </footer>
+        <x-footer />
     @endif
 </body>
 </html>
