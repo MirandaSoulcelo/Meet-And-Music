@@ -1,0 +1,78 @@
+/* Profile Header */
+.profile-header {
+    @apply mb-8;
+}
+
+.profile-avatar {
+    @apply w-16 h-16 rounded-full bg-surface/60 flex items-center justify-center text-2xl text-text-light mr-6;
+}
+
+.profile-info {
+    @apply flex-1;
+}
+
+.profile-name {
+    @apply text-2xl font-bold text-text mb-1;
+}
+
+.profile-meta {
+    @apply text-sm text-text-light;
+}
+
+/* Stats Grid */
+.stats-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-6 mb-8;
+}
+
+.stat-card {
+    @apply bg-surface/60 backdrop-blur-md border border-white/10 rounded-[32px] p-6;
+}
+
+.stat-title {
+    @apply text-lg font-semibold text-text;
+}
+
+.stat-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-lg;
+}
+
+.stat-value {
+    @apply text-3xl font-bold text-text mt-2;
+}
+
+.stat-label {
+    @apply text-sm text-text-light mt-1;
+}
+
+/* Activity Card */
+.activity-card {
+    @apply bg-surface/60 backdrop-blur-md border border-white/10 rounded-[32px] p-6;
+}
+
+.activity-icon {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-lg mr-4;
+}
+
+.activity-content {
+    @apply flex-1;
+}
+
+.activity-title {
+    @apply text-text font-medium;
+}
+
+.activity-time {
+    @apply text-sm text-text-light mt-1;
+}
+
+/* Progress Bar */
+.progress-badge {
+    @apply text-xs font-semibold inline-block text-text-light;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats-grid {
+        @apply grid-cols-1;
+    }
+}
