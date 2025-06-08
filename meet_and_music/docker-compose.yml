@@ -1,18 +1,30 @@
+version: '3.8'
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - COMPOSER_AUTH=${COMPOSER_AUTH}
+        - NODE_ENV=development
     ports:
       - "8000:8000"
     volumes:
       - .:/var/www/html
+      - /var/www/html/vendor
+      - /var/www/html/node_modules
     environment:
       - APP_ENV=local
       - DB_CONNECTION=sqlite
-    command: sh -c "php artisan serve --host=0.0.0.0"
+      - VITE_HOST=0.0.0.0
     networks:
       - meet-and-music-network
+    healthcheck:
+      test: ["CMD", "php", "artisan", "--version"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   node:
     image: node:20
@@ -27,4 +39,4 @@ services:
 
 networks:
   meet-and-music-network:
-    driver: bridge 
+    driver: bridge

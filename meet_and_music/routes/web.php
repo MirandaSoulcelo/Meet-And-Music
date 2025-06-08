@@ -21,8 +21,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/homelist', [UserController::class, 'index'])->name('users.index');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 
-  
-   
+
+
 
 });
 
@@ -52,7 +52,7 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy'
 
 // Rota de lições
 Route::middleware('auth')->group(function() {
-    
+
 
     //obter quiz com questões de acordo com a lição
     Route::get('/lessons/{lesson}/quiz', [LessonController::class, 'showQuiz'])->name('lessons.quiz');
@@ -61,24 +61,22 @@ Route::middleware('auth')->group(function() {
     //enviar respostas do usuário e fazer a lógica de xp com base em acerto
     Route::post('/lessons/{lesson}/submit', [LessonController::class, 'submitQuiz'])->name('lessons.submit');
 
-    
+
     Route::get('/lessons', [LessonController::class, 'index'])->name('lessons.index');
    // Route::get('/lessons/show', [LessonController::class, 'show'])->name('lessons.show');
 
-    
+
     //Route::get('/showlessons', [LessonController::class, 'ShowLessons'])->name('lessons.index');
-   
-   
 
 
-    
+
+
+
 });
 
 // Rota de Ranking
 Route::middleware('auth')->group(function() {
-
-
-Route::get('/ranking', [RankingController::class, 'showRanking']);
+    Route::get('/ranking', [RankingController::class, 'showRanking'])->name('ranking');
 });
 
 
@@ -103,24 +101,24 @@ Route::middleware('auth')->group(function () {
     // Criar reunião
     Route::post('/meeting/criar', [MeetingController::class, 'criarChamada'])
          ->name('meeting.criar');
-    
-    // Entrar em reunião - FORMULÁRIO 
+
+    // Entrar em reunião - FORMULÁRIO
     Route::get('/entrar-reuniao', [MeetingController::class, 'formEntrarReuniao'])
          ->name('meeting.join.form');
-    
-    // Entrar em reunião - 
+
+    // Entrar em reunião -
     Route::post('/entrar-reuniao', [MeetingController::class, 'processarEntradaReuniao'])
          ->name('meeting.join.process');
-    
+
 
     // Acessar sala de vídeo
     Route::get('/video-call/{meetingId}', [MeetingController::class, 'entrarChamada'])
          ->name('meeting.video.call');
-    
+
     // Listar minhas reuniões
     Route::get('/minhas-chamadas', [MeetingController::class, 'minhasChamadas'])
          ->name('meetings.index');
-    
+
     // Gerar convite
     Route::get('/meeting/{meetingId}/convite', [MeetingController::class, 'gerarConvite'])
          ->name('meeting.convite');

@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public function friends()
 {
-    
+
     $friendIds = DB::table('friend_user')
         ->where(function($query) {
             $query->where('user_id', $this->id)
@@ -77,14 +77,14 @@ class User extends Authenticatable
                   ->where('accepted', true);
         })
         ->select(
-            DB::raw('CASE 
-                WHEN user_id = ' . $this->id . ' THEN friend_id 
-                WHEN friend_id = ' . $this->id . ' THEN user_id 
+            DB::raw('CASE
+                WHEN user_id = ' . $this->id . ' THEN friend_id
+                WHEN friend_id = ' . $this->id . ' THEN user_id
                 END as id'
             )
         )
         ->pluck('id');
-    
+
     return User::whereIn('id', $friendIds);
 }
     public function isFriendWith(User $user)
