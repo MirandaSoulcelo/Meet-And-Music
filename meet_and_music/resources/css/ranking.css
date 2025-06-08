@@ -1,0 +1,130 @@
+/* Estilos específicos da página de ranking */
+
+.ranking-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.ranking-card {
+    background: var(--surface);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.ranking-header {
+    background: var(--background);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.ranking-body {
+    padding: 1.5rem;
+}
+
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table th {
+    background: var(--background);
+    color: var(--text);
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.ranking-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+}
+
+.ranking-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ranking-table tr:hover {
+    background: var(--background);
+}
+
+/* Badges */
+.ranking-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.ranking-badge.secondary {
+    background: var(--background);
+    color: var(--text-light);
+}
+
+.ranking-badge.success {
+    background: var(--success-color);
+    opacity: 0.2;
+    color: var(--success-color);
+}
+
+.ranking-badge.warning {
+    background: var(--warning-color);
+    opacity: 0.2;
+    color: var(--warning-color);
+}
+
+/* Botões */
+.ranking-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.ranking-button.primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.ranking-button.success {
+    background: var(--success-color);
+    color: white;
+}
+
+.ranking-button.danger {
+    background: var(--error-color);
+    color: white;
+}
+
+.ranking-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Formulários inline */
+.ranking-form {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.ranking-form:last-child {
+    margin-right: 0;
+}
+
+/* Texto de login */
+.ranking-login-text {
+    color: var(--text-light);
+    font-size: 0.875rem;
+}

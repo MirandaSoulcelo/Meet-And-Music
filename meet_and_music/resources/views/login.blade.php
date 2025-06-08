@@ -33,10 +33,10 @@
                 </div>
 
                 <h2 class="text-2xl font-bold text-primary mb-8 text-center">Bem-vindo de volta!</h2>
-                
+
                 <form class="space-y-5" action="{{ route('login.store') }}" method="POST">
                     @csrf
-                    
+
                     @if($errors->has('error'))
                         <div class="bg-red-900/10 border border-red-500/20 text-red-400 px-6 py-4 rounded-2xl text-sm backdrop-blur-sm" role="alert">
                             <span class="block sm:inline">{{ $errors->first('error') }}</span>
@@ -44,7 +44,7 @@
                     @endif
 
                     <div>
-                        <input id="email" name="email" type="email" required 
+                        <input id="email" name="email" type="email" required
                             class="w-full px-6 py-4 bg-background/40 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 text-text placeholder-text-light/40 backdrop-blur-sm transition-all"
                             placeholder="Email"
                             value="{{ old('email') }}">

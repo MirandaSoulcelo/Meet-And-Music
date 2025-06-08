@@ -1,0 +1,160 @@
+/* Estilos específicos da página de perfil */
+
+/* Cabeçalho do Perfil */
+.profile-header {
+    background: var(--surface);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.profile-avatar {
+    height: 6rem;
+    width: 6rem;
+    border-radius: 9999px;
+    background: var(--background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-avatar i {
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.profile-info {
+    margin-left: 1.5rem;
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.profile-meta {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.profile-badge {
+    background: var(--background);
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+}
+
+/* Grid de Estatísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.stat-card {
+    background: var(--surface);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.stat-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-icon i {
+    font-size: 1.5rem;
+}
+
+.stat-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 1rem;
+}
+
+.stat-value {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+/* Progresso */
+.progress-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    background: var(--success-color);
+    color: white;
+}
+
+.progress-bar {
+    height: 0.5rem;
+    background: var(--background);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--success-color);
+    transition: width 0.3s ease;
+}
+
+/* Atividades Recentes */
+.activity-card {
+    background: var(--surface);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.activity-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-icon i {
+    font-size: 1.25rem;
+}
+
+.activity-content {
+    margin-left: 1rem;
+}
+
+.activity-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
