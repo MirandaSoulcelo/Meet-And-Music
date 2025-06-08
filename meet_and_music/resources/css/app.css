@@ -1,5 +1,5 @@
 @import 'global.css';
-@import 'pages/profile.css';
+@import './profile.css';
 @import 'pages/ranking.css';
 
 /* public/css/style.css */

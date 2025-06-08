@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('content')
-<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 profile-content">
     <x-profile.header :user="auth()->user()" />
 
     <!-- Grid de Estatísticas -->
@@ -36,7 +36,7 @@
     <!-- Seção de Atividades Recentes -->
     <x-card class="activity-card">
         <h2 class="stat-title mb-4">Atividades Recentes</h2>
-        <div class="space-y-4">
+        <div class="activity-list">
             <x-profile.activity-item
                 title="Completou a lição 'Acordes Básicos'"
                 time="Há 2 dias"
