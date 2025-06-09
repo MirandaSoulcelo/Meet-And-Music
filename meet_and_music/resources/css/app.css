@@ -4,10 +4,9 @@
 
 /* public/css/style.css */
 body {
+    padding-top: 130px !important;
+    padding-bottom: 64px;
     margin: 0;
-    padding: 0;
-    padding-top: 96px; /* altura do header + espaçamento */
-    padding-bottom: 64px; /* altura do footer + espaçamento */
     font-family: 'Inter', sans-serif;
     background-color: var(--background);
     color: var(--text);
@@ -143,3 +142,13 @@ button.delete-btn:hover {
     margin: 0;
     max-width: none;
 }
+
+.form-card {
+    width: 100%;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem 2rem;
+}
+body { padding-top: 120px !important; }
+body { padding-top: 130px !important; }

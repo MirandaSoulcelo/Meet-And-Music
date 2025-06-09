@@ -84,7 +84,7 @@ Route::middleware('auth')->group(function() {
 Route::middleware('auth')->group(function() {
 
 
-Route::get('/ranking', [RankingController::class, 'showRanking']);
+Route::get('/ranking', [RankingController::class, 'showRanking'])->name('ranking.index');
 });
 
 
