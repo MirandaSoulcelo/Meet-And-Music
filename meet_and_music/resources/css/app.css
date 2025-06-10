@@ -5,13 +5,23 @@
 
 /* public/css/style.css */
 body {
-    padding-top: 96px !important; /* 72px (header) + 24px (margem de segurança) */
-    padding-bottom: 64px;
+    padding-top: 150px !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     margin: 0;
     font-family: 'Inter', sans-serif;
     background-color: var(--background);
     color: var(--text);
     line-height: 1.5;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
 .container {
@@ -152,7 +162,14 @@ button.delete-btn:hover {
     padding: 2rem 2rem;
 }
 
-/* Teste para verificar se o arquivo está sendo carregado */
-body {
-    border: 5px solid magenta !important;
+/* Test border to verify CSS loading */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: magenta;
+    z-index: 9999;
 }

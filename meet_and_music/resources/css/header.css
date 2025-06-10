@@ -6,13 +6,14 @@
     width: 100%;
     z-index: 100;
     padding: 1.5rem 0;
-    background: rgba(15, 15, 19, 0.8);
+    background: rgba(15, 15, 19, 0.95);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
 }
 
 .header-content {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -23,18 +24,26 @@
 .nav-link {
     color: var(--text-light);
     font-weight: 500;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 8px;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .nav-link:hover {
     color: var(--primary);
     background: rgba(255,255,255,0.05);
+    transform: translateY(-1px);
 }
 
 .nav-profile-icon {
     cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.nav-profile-icon:hover {
+    background: rgba(255,255,255,0.05);
 }
 
 .group:hover .group-hover\:block {
@@ -49,6 +58,34 @@
     }
     .nav-links {
         flex-wrap: wrap;
-        gap: 1rem;
+        justify-content: center;
+        gap: 0.5rem;
     }
+    .nav-link {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Estilos para o menu dropdown do perfil */
+.profile-dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    z-index: 100;
+    width: 180px;
+    background-color: #2d3748;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--text-color, #fff);
+    font-size: 0.875rem;
+}
+
+.profile-dropdown a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
