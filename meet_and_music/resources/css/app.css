@@ -1,10 +1,11 @@
 @import 'global.css';
+@import 'header.css';
 @import './profile.css';
 @import 'pages/ranking.css';
 
 /* public/css/style.css */
 body {
-    padding-top: 130px !important;
+    padding-top: 96px !important; /* 72px (header) + 24px (margem de segurança) */
     padding-bottom: 64px;
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -150,5 +151,8 @@ button.delete-btn:hover {
     margin-right: auto;
     padding: 2rem 2rem;
 }
-body { padding-top: 120px !important; }
-body { padding-top: 130px !important; }
+
+/* Teste para verificar se o arquivo está sendo carregado */
+body {
+    border: 5px solid magenta !important;
+}

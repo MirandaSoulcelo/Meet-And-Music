@@ -70,7 +70,6 @@ html {
 }
 
 body {
-  padding-top: 80px;
   padding-bottom: 60px;
   font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
@@ -206,18 +205,6 @@ a {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-}
-
-nav, .header {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100% !important;
-  z-index: 100;
-  margin: 0 !important;
-  max-width: none !important;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
 }
 
 footer, .footer {
