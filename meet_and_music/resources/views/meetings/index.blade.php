@@ -1,15 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+{{-- Card principal que envolve toda a seção --}}
 <div class="content-card">
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="card-title" style="margin-bottom: 0; border-bottom: none;">Minhas Vídeo Chamadas</h1>
-        <a href="#" class="btn btn-primary">Nova Chamada</a>
+    {{-- Cabeçalho do Card: Título e Botão "Nova Chamada" --}}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h1 class="card-title" style="margin-bottom: 0; border-bottom: none;">Minhas Videochamadas</h1>
+        {{-- O botão para abrir o modal pode ser estilizado com as classes do projeto --}}
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criarMeetingModal">
+            Nova Chamada
+        </button>
     </div>
 
+    {{-- Grid para os cards das chamadas --}}
     @if($meetings->count() > 0)
         <div class="meetings-grid">
             @foreach($meetings as $meeting)
+                {{-- Card individual para cada chamada --}}
                 <div class="meeting-card">
                     <div>
                         <p class="meeting-title">
@@ -29,11 +36,17 @@
             @endforeach
         </div>
     @else
+        {{-- Mensagem para quando não há chamadas --}}
         <div class="empty-state">
             <h5 class="empty-state-title">Nenhuma videochamada criada ainda</h5>
             <p class="empty-state-text">Clique em "Nova Chamada" para começar.</p>
         </div>
     @endif
+</div>
+
+{{-- O Modal para Criar Meeting pode ser mantido, mas idealmente seria estilizado também --}}
+<div class="modal fade" id="criarMeetingModal" tabindex="-1">
+    {{-- ... conteúdo do modal ... --}}
 </div>
 @endsection
 
@@ -42,7 +55,7 @@
 function compartilhar(roomId) {
     const link = "{{ url('/video-call') }}/" + roomId;
     navigator.clipboard.writeText(link).then(() => {
-        alert('Link copiado para a área de transferência!');
+        alert('Link copiado! Compartilhe com os participantes.');
     });
 }
 </script>
