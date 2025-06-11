@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -10,7 +10,7 @@
                     Nova Chamada
                 </button>
             </div>
-            
+
             @if($meetings->count() > 0)
                 <div class="row">
                     @foreach($meetings as $meeting)
@@ -24,11 +24,11 @@
                                         </small>
                                     </p>
                                     <div class="d-flex gap-2">
-                                        <a href="{{ route('meeting.video.call', $meeting->room_id) }}" 
+                                        <a href="{{ route('meeting.video.call', $meeting->room_id) }}"
                                            class="btn btn-success btn-sm">
                                             Entrar
                                         </a>
-                                        <button class="btn btn-outline-primary btn-sm" 
+                                        <button class="btn btn-outline-primary btn-sm"
                                                 onclick="compartilhar('{{ $meeting->room_id }}')">
                                             Compartilhar
                                         </button>
@@ -61,7 +61,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Título da Chamada</label>
-                        <input type="text" class="form-control" id="title" name="title" 
+                        <input type="text" class="form-control" id="title" name="title"
                                placeholder="Ex: Reunião de Projeto" required>
                     </div>
                 </div>

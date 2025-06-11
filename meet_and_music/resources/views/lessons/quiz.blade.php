@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
 
@@ -15,10 +15,10 @@
                 <div class="space-y-2">
                     @foreach ($question->alternatives as $alternative)
                         <label class="flex items-center space-x-2">
-                            <input 
-                                type="radio" 
-                                name="answers[{{ $question->id }}]" 
-                                value="{{ $alternative->id }}" 
+                            <input
+                                type="radio"
+                                name="answers[{{ $question->id }}]"
+                                value="{{ $alternative->id }}"
                                 class="text-blue-600 focus:ring-blue-500 border-gray-300"
                                 required
                             >

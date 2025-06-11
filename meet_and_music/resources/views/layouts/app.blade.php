@@ -22,7 +22,8 @@
 
     {{-- Renderiza o conteúdo principal da página --}}
     <main>
-        {{ $slot }}
+        {{-- O conteúdo principal da página será injetado aqui --}}
+        @yield('content')
     </main>
 
     {{-- Renderiza o rodapé, se existir um componente para ele --}}
