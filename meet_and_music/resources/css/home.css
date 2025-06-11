@@ -16,14 +16,14 @@
     left: 0;
     right: 0;
     z-index: 100;
-    padding: 1.5rem;
+    padding: 2rem;
     background: rgba(15, 15, 19, 0.8);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
 }
 
 .header-content {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -42,25 +42,25 @@
     backdrop-filter: blur(12px);
     border: 1px solid var(--border);
     border-radius: 32px;
-    padding: 2.5rem;
+    padding: 1.5rem 2.5rem;
     margin-bottom: 2rem;
 }
 
 /* Hero Section */
 .hero-section {
     padding-top: 120px;
-    min-height: 100vh;
+    min-height: 10vh;
     display: flex;
     align-items: center;
 }
 
 .hero-content {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: center;
 }
 

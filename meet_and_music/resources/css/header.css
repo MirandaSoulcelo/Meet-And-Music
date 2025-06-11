@@ -97,3 +97,22 @@
     background-color: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
 }
+
+/* Estilos para a Logo e Links da Navbar */
+
+.header-logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo .logo-meet {
+    color: var(--primary-color);
+}
+
+.nav-links .nav-link {
+    font-size: var(--font-size-base);
+}

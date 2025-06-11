@@ -172,15 +172,3 @@ button.delete-btn:hover {
     margin-right: auto;
     padding: 2rem 2rem;
 }
-
-/* Test border to verify CSS loading */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: magenta;
-    z-index: 9999;
-}

@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <header class="header">
-        <div class="header-content">
-            <a href="/home" class="text-5xl font-bold">
-                <span class="text-primary">Meet</span>
-                <span class="text-text">&</span>
-                <span class="text-secondary">Music</span>
-            </a>
-            <nav class="nav-links">
-                <a href="/login" class="btn btn-outline">Entrar</a>
-                <a href="/usercreate" class="btn btn-primary">Começar Agora</a>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <!-- Hero Section -->
         <section class="hero-section">

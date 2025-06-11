@@ -2,62 +2,75 @@
 
 <header class="header">
     <div class="header-content">
-        {{-- Logo --}}
-        <div>
-            <a href="/home" class="text-2xl font-bold flex items-center text-white">
-                <span style="color: var(--primary-color);">Meet</span>
-                <span style="color: var(--secondary-color);">&</span>
-                <span style="color: var(--secondary-color);">Music</span>
+        <div class="flex-shrink-0">
+            {{-- O link do logo leva para a home de visitante se não logado, ou para o dashboard se logado --}}
+            <a href="{{ auth()->check() ? route('lessons.index') : '/' }}" class="header-logo">
+                <span class="logo-meet">Meet</span><span>&Music</span>
             </a>
         </div>
 
-        {{-- Navigation Links --}}
-        <div class="nav-links">
-            <a href="{{ route('lessons.index') }}" class="nav-link">Aprender</a>
-            <a href="{{ route('ranking.index') }}" class="nav-link">Ranking</a>
-            <a href="{{ route('friends.index') }}" class="nav-link">Comunidade</a>
-            <a href="{{ route('meetings.index') }}" class="nav-link">Chamadas</a>
-        </div>
+        <div class="flex items-center space-x-4">
 
-        {{-- Profile Dropdown --}}
-        <div class="relative">
-            <button id="profile-menu-button" class="nav-profile-icon" type="button" title="Meu Perfil">
-                <i class="fas fa-user-circle text-2xl" style="color: var(--text-light);"></i>
-            </button>
-            <div id="profile-menu-dropdown" class="profile-dropdown hidden">
-                <form action="{{ route('logout') }}" method="POST" class="block">
-                    @csrf
-                    <button type="submit" class="w-full text-left px-4 py-2 text-sm hover:bg-gray-700">Sair</button>
-                </form>
-            </div>
+            @auth
+                {{-- =============================================== --}}
+                {{-- CONTEÚDO EXIBIDO PARA USUÁRIOS AUTENTICADOS --}}
+                {{-- =============================================== --}}
+                <nav class="nav-links hidden md:flex"> {{-- Esconde os links em telas pequenas, ajuste se necessário --}}
+                    <a href="{{ route('lessons.index') }}" class="nav-link">Aprender</a>
+                    <a href="{{ route('ranking.index') }}" class="nav-link">Ranking</a>
+                    <a href="{{ route('friends.index') }}" class="nav-link">Comunidade</a>
+                    <a href="{{ route('meetings.index') }}" class="nav-link">Chamadas</a>
+                </nav>
+
+                <div class="relative ml-3">
+                    <button type="button" class="nav-profile-icon" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                        <span class="sr-only">Abrir menu do usuário</span>
+                        <i class="fas fa-user-circle text-2xl text-text-light hover:text-primary transition-colors"></i>
+                    </button>
+                    <div id="profile-menu-dropdown" class="profile-dropdown hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button">
+                        <form method="POST" action="{{ route('logout') }}" role="none">
+                            @csrf
+                            <button type="submit" class="dropdown-item w-full text-left" role="menuitem">
+                              Sair
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+
+            @guest
+                {{-- =============================================== --}}
+                {{-- CONTEÚDO EXIBIDO PARA VISITANTES (NÃO LOGADOS) --}}
+                {{-- =============================================== --}}
+                <nav class="flex items-center space-x-2">
+                    <a href="{{ route('login.index') }}" class="btn btn-outline">Entrar</a>
+                    <a href="{{ route('user.create') }}" class="btn btn-primary">Criar Conta</a>
+                </nav>
+            @endguest
+
         </div>
     </div>
 </header>
 
+{{-- O SCRIPT DO DROPDOWN SÓ É INCLUÍDO SE O USUÁRIO ESTIVER LOGADO --}}
+@auth
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const profileButton = document.getElementById('profile-menu-button');
-    const profileDropdown = document.getElementById('profile-menu-dropdown');
-    const profileIcon = profileButton.querySelector('i');
+    document.addEventListener('DOMContentLoaded', function () {
+        const profileButton = document.getElementById('user-menu-button');
+        const profileDropdown = document.getElementById('profile-menu-dropdown');
 
-    if (profileButton && profileDropdown) {
-        profileButton.addEventListener('click', function(event) {
-            event.stopPropagation();
-            profileDropdown.classList.toggle('hidden');
-        });
+        if (profileButton && profileDropdown) {
+            profileButton.addEventListener('click', function (event) {
+                event.stopPropagation();
+                profileDropdown.classList.toggle('hidden');
+            });
 
-        profileButton.addEventListener('mouseover', () => {
-             profileIcon.style.color = 'var(--primary-color)';
-        });
-        profileButton.addEventListener('mouseout', () => {
-             profileIcon.style.color = 'var(--text-light)';
-        });
-
-        window.addEventListener('click', function(event) {
-            if (!profileDropdown.classList.contains('hidden') && !profileButton.contains(event.target)) {
-                profileDropdown.classList.add('hidden');
-            }
-        });
-    }
-});
+            window.addEventListener('click', function (event) {
+                if (!profileDropdown.classList.contains('hidden') && !profileButton.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+        }
+    });
 </script>
+@endauth
