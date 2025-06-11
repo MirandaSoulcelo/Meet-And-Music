@@ -4,7 +4,7 @@
     <div class="header-content">
 
         <div class="flex-shrink-0">
-            <a href="{{ auth()->check() ? route('lessons.index') : '/' }}" class="header-logo">
+            <a href="{{ auth()->check() ? route('home') : '/' }}" class="header-logo">
                 <span class="logo-meet">Meet</span><span>&Music</span>
             </a>
         </div>
