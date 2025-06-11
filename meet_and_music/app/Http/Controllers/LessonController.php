@@ -64,10 +64,9 @@ class LessonController extends Controller
 
     public function index()
     {
-        return view('lessons.index', [
-            'lessons' => $this->lessons,
-            'total_lessons' => count($this->lessons)
-        ]);
+        $lessons = Lesson::all();
+
+        return view('lessons.index', ['lessons' => $lessons]);
     }
 
     public function show($id)
@@ -90,8 +89,6 @@ class LessonController extends Controller
         ]);
     }
 
-
-
     public function submitQuiz(Request $request, $id)
     {
         $lesson = Lesson::with('questions.alternatives')->findOrFail($id);
@@ -105,8 +102,6 @@ class LessonController extends Controller
             if ($correct && $selected == $correct->id) {
                 $acertos++;
             }
-
-           
         }
 
         // XP baseado em acertos
@@ -121,36 +116,56 @@ class LessonController extends Controller
             default => 0
         };
 
-       
-       /** @var \App\Models\User $user */
-       $user = Auth::user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
 
-       $user->adicionarXpParaUsuario($xpGanho);
+        $user->adicionarXpParaUsuario($xpGanho);
 
-
-       return view('lessons.quiz_result', [
-        'acertos' => $acertos,
-        'xpGanho' => $acertos * 10, // ou outro cálculo
-        'lesson' => $lesson,
-        'answers' => $answers
-    ]);
+        return view('lessons.quiz_result', [
+            'acertos' => $acertos,
+            'xpGanho' => $acertos * 10, // ou outro cálculo
+            'lesson' => $lesson,
+            'answers' => $answers
+        ]);
     }
 
-   
-
     public function ShowLessons()
-{
-    $lessons = Lesson::all();
-    return response()->json($lessons);
-}
+    {
+        $lessons = Lesson::all();
+        return response()->json($lessons);
+    }
 
-public function showQuiz(Lesson $lesson)
-{
-    $questions = $lesson->questions()->with('alternatives')->get();
-    return view('lessons.quiz', compact('lesson', 'questions'));
-}
+    public function showQuiz(Lesson $lesson)
+    {
+        $questions = $lesson->questions()->with('alternatives')->get();
+        return view('lessons.quiz', compact('lesson', 'questions'));
+    }
 
+    public function quiz(Lesson $lesson)
+    {
+        return view('lessons.quiz', ['lesson' => $lesson]);
+    }
 
+    public function submit(Request $request, Lesson $lesson)
+    {
+        $answers = $request->input('answers');
+        $score = 0;
 
+        foreach ($answers as $questionId => $answer) {
+            $question = $lesson->questions()->find($questionId);
+            if ($question && $question->correct_answer === $answer) {
+                $score++;
+            }
+        }
 
+        $totalQuestions = $lesson->questions()->count();
+        $percentage = ($score / $totalQuestions) * 100;
+
+        return view('lessons.result', [
+            'lesson' => $lesson,
+            'score' => $score,
+            'total' => $totalQuestions,
+            'percentage' => $percentage
+        ]);
+    }
 }

@@ -6,30 +6,15 @@
     <div class="content-card">
         <h1 class="card-title">Módulos de Aprendizagem</h1>
         <div class="item-list-container">
-            {{-- Cada módulo é um link clicável com layout flex --}}
-            <a href="#" class="item-card">
-                <div class="item-card-content">
-                    <h3 class="item-card-title">Módulo 1: Introdução à Música</h3>
-                    <p class="item-card-description">Descubra os fundamentos da música, incluindo ritmo, melodia e harmonia.</p>
-                </div>
-                <div class="btn btn-primary btn-sm">Começar Módulo</div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="item-card-content">
-                    <h3 class="item-card-title">Módulo 2: Ritmo e Tempo</h3>
-                    <p class="item-card-description">Aprenda a identificar e praticar diferentes ritmos e padrões de tempo.</p>
-                </div>
-                <div class="btn btn-primary btn-sm">Começar Módulo</div>
-            </a>
-
-            <a href="#" class="item-card">
-                <div class="item-card-content">
-                    <h3 class="item-card-title">Módulo 3: Melodia e Harmonia</h3>
-                    <p class="item-card-description">Explore como as melodias são criadas e como harmonizá-las com acordes.</p>
-                </div>
-                <div class="btn btn-primary btn-sm">Começar Módulo</div>
-            </a>
+            @foreach ($lessons as $lesson)
+                <a href="{{ route('lessons.quiz', ['lesson' => $lesson->id]) }}" class="item-card">
+                    <div class="item-card-content">
+                        <h3 class="item-card-title">{{ $lesson->title }}</h3>
+                        <p class="item-card-description">{{ $lesson->description }}</p>
+                    </div>
+                    <div class="btn btn-primary btn-sm">Começar Módulo</div>
+                </a>
+            @endforeach
         </div>
     </div>
 
