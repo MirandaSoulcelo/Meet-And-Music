@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
@@ -17,13 +17,13 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-12">
-            <iframe 
+            <iframe
                 id="jitsi-iframe"
-                src="https://meet.jit.si/{{ $roomName }}" 
-                width="100%" 
+                src="https://meet.jit.si/{{ $roomName }}"
+                width="100%"
                 height="600px"
                 style="border: none;"
                 allow="camera; microphone; fullscreen; display-capture; autoplay">

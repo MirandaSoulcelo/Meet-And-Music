@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 <script>
 document.getElementById('meeting_input').addEventListener('paste', function(e) {
     setTimeout(() => {
@@ -22,16 +22,16 @@ document.getElementById('meeting_input').addEventListener('paste', function(e) {
                 <div class="card-body">
                     <form method="POST" action="{{ route('meeting.join.process') }}">
                         @csrf
-                        
+
                         <div class="mb-3">
                             <label for="meeting_input" class="form-label">
                                 Código da Reunião ou Link
                             </label>
-                            <input 
-                                type="text" 
-                                class="form-control @error('meeting_input') is-invalid @enderror" 
-                                id="meeting_input" 
-                                name="meeting_input" 
+                            <input
+                                type="text"
+                                class="form-control @error('meeting_input') is-invalid @enderror"
+                                id="meeting_input"
+                                name="meeting_input"
                                 placeholder="Ex: ABC123XYZ ou cole o link completo"
                                 value="{{ old('meeting_input') }}"
                                 required
@@ -45,14 +45,14 @@ document.getElementById('meeting_input').addEventListener('paste', function(e) {
                                 Você pode inserir o código da reunião ou colar o link completo
                             </div>
                         </div>
-                        
+
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">
                                 Entrar na Reunião
                             </button>
                         </div>
                     </form>
-                
+
                 </div>
             </div>
         </div>

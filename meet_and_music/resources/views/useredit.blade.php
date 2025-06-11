@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
 <div class="min-h-screen flex items-center justify-center bg-background p-4">
@@ -33,11 +33,11 @@
                 </div>
 
                 <h2 class="text-2xl font-bold text-primary mb-8 text-center">Editar Perfil</h2>
-                
+
                 <form class="space-y-5" action="{{ route('user.update', $user->id) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    
+
                     @if($errors->any())
                         <div class="bg-red-900/10 border border-red-500/20 text-red-400 px-6 py-4 rounded-2xl text-sm backdrop-blur-sm" role="alert">
                             @foreach($errors->all() as $error)
@@ -47,14 +47,14 @@
                     @endif
 
                     <div>
-                        <input id="name" name="name" type="text" required 
+                        <input id="name" name="name" type="text" required
                             class="w-full px-6 py-4 bg-background/40 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 text-text placeholder-text-light/40 backdrop-blur-sm transition-all"
                             placeholder="Nome completo"
                             value="{{ old('name', $user->name) }}">
                     </div>
 
                     <div>
-                        <input id="email" name="email" type="email" required 
+                        <input id="email" name="email" type="email" required
                             class="w-full px-6 py-4 bg-background/40 border border-white/10 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/50 text-text placeholder-text-light/40 backdrop-blur-sm transition-all"
                             placeholder="Email"
                             value="{{ old('email', $user->email) }}">

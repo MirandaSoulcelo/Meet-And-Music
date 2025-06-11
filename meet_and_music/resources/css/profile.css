@@ -1,0 +1,193 @@
+/* Estilos específicos da página de perfil */
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem; /* 10px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 0.625rem; /* 10px */
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.profile-meta-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile-meta {
+    font-size: 1rem;
+    color: var(--text-light);
+    display: block;
+    margin-bottom: 0;
+}
+
+.profile-meta i {
+    margin-right: 10px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.9375rem; /* 15px */
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.stat-card {
+    background: var(--surface);
+    border-radius: 32px;
+    padding: 24px;
+    margin-bottom: 0.9375rem; /* 15px */
+}
+
+.stat-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.stat-icon {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-xl;
+}
+
+.stat-value {
+    @apply text-4xl font-bold text-text mt-4;
+}
+
+.stat-label {
+    @apply text-sm text-text-light mt-2;
+}
+
+/* Activity Card */
+.activity-card {
+    background: var(--surface);
+    border-radius: 32px;
+    padding: 32px;
+    margin-bottom: 0.9375rem; /* 15px */
+    margin-top: 0.9375rem; /* 15px */
+}
+
+.activity-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+.activity-content {
+    flex: 1;
+    margin-left: 0.625rem; /* 10px */
+}
+
+.activity-title {
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.activity-time {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-top: 0;
+}
+
+/* Progress Bar */
+.progress-badge {
+    @apply text-xs font-semibold inline-block text-text-light;
+}
+
+/* Navigation */
+.nav-link {
+    @apply text-text-light hover:text-primary inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-primary text-sm font-medium transition-colors;
+}
+
+.nav-profile-icon {
+    @apply flex items-center justify-center;
+}
+
+/* Footer */
+.footer {
+    @apply bg-surface/80 backdrop-blur-md border-t border-border mt-auto;
+}
+
+.footer-content {
+    @apply container mx-auto py-6 px-4 sm:px-6 lg:px-8;
+}
+
+.footer-text {
+    @apply text-center text-text-light text-sm;
+}
+
+/* Padding para evitar sobreposição com header/footer fixos */
+.profile-content {
+    padding-top: 80px;
+    padding-bottom: 60px;
+}
+
+/* Espaçamento entre activity-item */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .profile-header {
+        gap: 10px;
+        padding: 10px;
+    }
+    .profile-avatar {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+    }
+    .profile-name {
+        font-size: 1.3rem;
+    }
+    .activity-card {
+        padding: 16px;
+    }
+    .profile-content {
+        padding-top: 72px;
+        padding-bottom: 56px;
+    }
+}

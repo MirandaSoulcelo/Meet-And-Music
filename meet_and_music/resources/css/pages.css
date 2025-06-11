@@ -1,0 +1,81 @@
+/* resources/css/pages.css */
+
+/* Card principal que envolve o conteúdo da página */
+.content-card {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-xl); /* 20px */
+    padding: var(--spacing-lg); /* 2rem */
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Título padrão para os cards */
+.card-title {
+    font-size: var(--font-size-2xl); /* 1.5rem */
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Grid para cards de conteúdo */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Card individual para itens */
+.item-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Título do item card */
+.item-card-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Texto secundário do item card */
+.item-card-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Container de botões do item card */
+.item-card-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: auto;
+}
+
+/* Mensagem de estado vazio */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.empty-state-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xs);
+}
+
+.empty-state-text {
+    color: var(--text-light);
+}
+
+/* Linha divisória para itens de uma lista dentro de um card */
+.card-item-list > * + * {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}

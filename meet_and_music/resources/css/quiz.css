@@ -1,0 +1,67 @@
+/* Estilos específicos para a página de Quiz */
+
+/* Card para cada questão do quiz, com o visual de um .item-card */
+.quiz-question-card {
+    background: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem; /* Espaçamento entre as perguntas */
+}
+
+.quiz-question-text {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+/* Container das alternativas com o espaçamento solicitado */
+.quiz-alternatives-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Espaçamento de 4px entre os radio buttons */
+}
+
+/* Estilo da label que envolve cada alternativa */
+.quiz-alternative {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.quiz-alternative:hover {
+    border-color: var(--primary-color);
+}
+
+/* Esconde o radio button original */
+.quiz-alternative input[type="radio"] {
+    display: none;
+}
+
+/* Indicador visual customizado */
+.quiz-alternative .radio-indicator {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--border-color);
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+/* Estilo do indicador quando a opção é selecionada */
+.quiz-alternative input[type="radio"]:checked + .radio-indicator {
+    border-color: var(--primary-color);
+    background-color: var(--primary-color);
+}
+
+/* Container do botão de submissão */
+.quiz-submit-container {
+    margin-top: 2rem;
+}

@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuários</title>
-</head>
-<body>
+@extends('layouts.app')
 
+@section('content')
     <h1>Lista de Usuários</h1>
-
- 
-
-
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
-
     @if(session('error'))
     <div class="alert alert-danger">
        <p style="color: red;"> {{ session('error') }}</p>
     </div>
-@endif
-
+    @endif
     <!-- Tabela de Usuários -->
     <table border="1">
         <thead>
@@ -41,7 +29,6 @@
                     <td>
                         <!-- Ação de Editar -->
                         <a href="{{ route('user.edit', $user->id) }}">Editar</a> |
-
                         <!-- Ação de Excluir -->
                         <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display:inline;">
                             @csrf
@@ -53,8 +40,6 @@
             @endforeach
         </tbody>
     </table>
-
     <br>
-    <a href="{{ route('user.create') }}">Criar Novo Usuário</a> <!-- Link para voltar ao formulário -->
-</body>
-</html>
+    <a href="{{ route('user.create') }}">Criar Novo Usuário</a>
+@endsection

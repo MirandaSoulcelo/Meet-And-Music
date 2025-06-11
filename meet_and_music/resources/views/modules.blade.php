@@ -1,30 +1,28 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
-<div class="bg-surface rounded-lg shadow-lg p-6 mb-6 border border-border">
+<div class="module-header">
     <div class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold text-gradient">Música completa</h1>
+        <h1 class="module-title">Música completa</h1>
         <div class="flex items-center">
-            <span class="bg-primary/20 text-primary text-xs font-medium px-2.5 py-0.5 rounded">Nível Iniciante</span>
+            <span class="module-level">Nível Iniciante</span>
         </div>
     </div>
 
     <!-- Módulos de Aprendizado -->
-    <div class="space-y-4">
+    <div class="module-list">
         <!-- Módulo 1: Introdução -->
-        <div class="bg-background rounded-lg p-4 hover:bg-surface-hover transition border border-border">
+        <div class="module-item">
             <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                        <i class="fas fa-music text-primary"></i>
-                    </div>
+                <div class="module-icon">
+                    <i class="fas fa-music"></i>
                 </div>
-                <div class="ml-4">
-                    <h2 class="text-lg font-medium text-text">Módulo 1: Introdução à Música</h2>
-                    <p class="text-sm text-text-light">Aprenda os conceitos básicos da teoria musical</p>
+                <div class="module-content">
+                    <h2 class="module-name">Módulo 1: Introdução à Música</h2>
+                    <p class="module-description">Aprenda os conceitos básicos da teoria musical</p>
                 </div>
                 <div class="ml-auto">
-                    <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-green-900/20 text-green-400">
+                    <span class="module-status complete">
                         0% Completo
                     </span>
                 </div>
@@ -32,19 +30,17 @@
         </div>
 
         <!-- Módulo 2: Ritmo -->
-        <div class="bg-background rounded-lg p-4 hover:bg-surface-hover transition border border-border">
+        <div class="module-item">
             <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                        <i class="fas fa-drum text-primary"></i>
-                    </div>
+                <div class="module-icon">
+                    <i class="fas fa-drum"></i>
                 </div>
-                <div class="ml-4">
-                    <h2 class="text-lg font-medium text-text">Módulo 2: Ritmo e Tempo</h2>
-                    <p class="text-sm text-text-light">Desenvolva sua percepção rítmica</p>
+                <div class="module-content">
+                    <h2 class="module-name">Módulo 2: Ritmo e Tempo</h2>
+                    <p class="module-description">Desenvolva sua percepção rítmica</p>
                 </div>
                 <div class="ml-auto">
-                    <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-background text-text-light border border-border">
+                    <span class="module-status locked">
                         Bloqueado
                     </span>
                 </div>
@@ -52,19 +48,17 @@
         </div>
 
         <!-- Módulo 3: Melodia -->
-        <div class="bg-background rounded-lg p-4 hover:bg-surface-hover transition border border-border">
+        <div class="module-item">
             <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center">
-                        <i class="fas fa-microphone-alt text-primary"></i>
-                    </div>
+                <div class="module-icon">
+                    <i class="fas fa-microphone-alt"></i>
                 </div>
-                <div class="ml-4">
-                    <h2 class="text-lg font-medium text-text">Módulo 3: Melodia e Harmonia</h2>
-                    <p class="text-sm text-text-light">Explore notas, escalas e acordes</p>
+                <div class="module-content">
+                    <h2 class="module-name">Módulo 3: Melodia e Harmonia</h2>
+                    <p class="module-description">Explore notas, escalas e acordes</p>
                 </div>
                 <div class="ml-auto">
-                    <span class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full bg-background text-text-light border border-border">
+                    <span class="module-status locked">
                         Bloqueado
                     </span>
                 </div>
@@ -74,40 +68,40 @@
 </div>
 
 <!-- Seção de Prática -->
-<div class="bg-surface rounded-lg shadow-lg p-6 border border-border">
-    <h2 class="text-xl font-bold text-gradient mb-4">Prática em Grupo</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="practice-section">
+    <h2 class="practice-title">Prática em Grupo</h2>
+    <div class="practice-grid">
         <!-- Card de Videochamada -->
-        <div class="border border-border rounded-lg p-4 bg-background">
+        <div class="practice-card">
             <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center">
-                    <i class="fas fa-video text-primary"></i>
+                <div class="practice-icon primary">
+                    <i class="fas fa-video"></i>
                 </div>
-                <div class="ml-3">
-                    <h3 class="text-lg font-medium text-text">Jam Session Online</h3>
-                    <p class="text-sm text-text-light">Pratique com outros músicos em tempo real</p>
+                <div class="practice-content">
+                    <h3 class="practice-name">Jam Session Online</h3>
+                    <p class="practice-description">Pratique com outros músicos em tempo real</p>
                 </div>
             </div>
-            <button class="w-full bg-gradient-primary text-white px-4 py-2 rounded-md hover:bg-gradient-primary-hover transition">
+            <button class="practice-button primary">
                 Participar Agora
             </button>
         </div>
 
         <!-- Card de Desafios -->
-        <div class="border border-border rounded-lg p-4 bg-background">
+        <div class="practice-card">
             <div class="flex items-center mb-4">
-                <div class="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center">
-                    <i class="fas fa-trophy text-secondary"></i>
+                <div class="practice-icon secondary">
+                    <i class="fas fa-trophy"></i>
                 </div>
-                <div class="ml-3">
-                    <h3 class="text-lg font-medium text-text">Desafios Musicais</h3>
-                    <p class="text-sm text-text-light">Complete desafios diários e ganhe pontos</p>
+                <div class="practice-content">
+                    <h3 class="practice-name">Desafios Musicais</h3>
+                    <p class="practice-description">Complete desafios diários e ganhe pontos</p>
                 </div>
             </div>
-            <button class="w-full bg-gradient-secondary text-white px-4 py-2 rounded-md hover:bg-gradient-secondary-hover transition">
+            <button class="practice-button secondary">
                 Ver Desafios
             </button>
         </div>
     </div>
 </div>
-@endsection 
+@endsection

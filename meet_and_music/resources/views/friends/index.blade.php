@@ -1,100 +1,56 @@
-@extends('master')
+@extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Lista de Amigos</div>
+<div class="content-card">
+    <h1 class="card-title">Lista de Amigos</h1>
 
-                <div class="card-body">
-                    @if(empty($friendsWithMeetingStatus) || count($friendsWithMeetingStatus) == 0)
-                        <div class="alert alert-info">
-                            Você ainda não tem amigos adicionados.
-                        </div>
-                    @else
-                        <ul class="list-group">
-                            @foreach($friendsWithMeetingStatus as $friendData)
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="flex-grow-1">
-                                            <h6 class="mb-1">{{ $friendData['user']->name }}</h6>
-                                            
-                                            @if($friendData['is_in_meeting'])
-                                                <div class="mt-1">
-                                                    <span class="badge bg-success me-2">
-                                                        <i class="fas fa-video"></i> Em sala
-                                                    </span>
-                                                    <small class="text-muted">
-                                                        Código: <strong>{{ $friendData['meeting_code'] }}</strong>
-                                                    </small>
-                                                </div>
-                                                <div class="mt-1">
-                                                    <small class="text-muted">{{ $friendData['meeting_title'] }}</small>
-                                                </div>
-                                            @else
-                                                <span class="badge bg-secondary">
-                                                    <i class="fas fa-circle"></i> Offline
-                                                </span>
-                                            @endif
-                                        </div>
-                                        
-                                        <div class="ms-3">
-                                            @if($friendData['is_in_meeting'])
-                                                <a href="{{ $friendData['meeting_link'] }}" 
-                                                   class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-phone"></i> Conectar-se
-                                                </a>
-                                            @endif
-                                            
-                                            <!-- Botão para remover amigo (se você quiser manter) -->
-                                            <button class="btn btn-outline-danger btn-sm ms-2" 
-                                                    onclick="confirmarRemocao('{{ $friendData['user']->name }}', {{ $friendData['user']->id }})">
-                                                <i class="fas fa-user-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
-                </div>
-            </div>
+    @if(empty($friendsWithMeetingStatus) || count($friendsWithMeetingStatus) == 0)
+        <div class="text-center py-8">
+            <h5 class="text-lg font-semibold">Você ainda não tem amigos adicionados.</h5>
+            <p class="text-text-light mt-2">Use a busca na comunidade para encontrar novos amigos.</p>
         </div>
-    </div>
+    @else
+        <div class="module-list mt-8">
+            @foreach($friendsWithMeetingStatus as $friendData)
+                {{-- Cada amigo agora é um "module-item" para herdar o estilo --}}
+                <div class="module-item">
+                    <div class="module-item-content">
+                        <h3 class="module-item-title">{{ $friendData['user']->name }}</h3>
+
+                        @if($friendData['is_in_meeting'])
+                            <p class="module-item-description" style="color: var(--success-color);">
+                                <i class="fas fa-video"></i> Em sala: {{ $friendData['meeting_title'] ?? '' }}
+                            </p>
+                        @else
+                            <p class="module-item-description">
+                                <i class="fas fa-circle" style="font-size: 0.7em;"></i> Offline
+                            </p>
+                        @endif
+                    </div>
+
+                    {{-- Container dos botões agora usa CSS Grid para garantir colunas de tamanho igual --}}
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; width: 300px;">
+                        @if($friendData['is_in_meeting'])
+                            <a href="{{ $friendData['meeting_link'] ?? '#' }}" class="btn btn-primary btn-sm w-full">
+                                Conectar-se
+                            </a>
+                        @else
+                            <div></div>
+                        @endif
+
+                        <form action="{{ route('friends.remove', $friendData['user']->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover {{ $friendData['user']->name }} da sua lista de amigos?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline btn-sm w-full">
+                                Remover
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 </div>
 
-<!-- Modal para confirmar remoção -->
-<div class="modal fade" id="removeModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-           
-</div>
-
-<script>
-function confirmarRemocao(friendName, friendId) {
-    document.getElementById('friendName').textContent = friendName;
-    document.getElementById('removeForm').action = `/friends/${friendId}`;
-    new bootstrap.Modal(document.getElementById('removeModal')).show();
-}
-</script>
-
-<style>
-.badge {
-    font-size: 0.75rem;
-}
-
-.list-group-item {
-    transition: background-color 0.2s;
-}
-
-.list-group-item:hover {
-    background-color: #f8f9fa;
-}
-
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
-}
-</style>
+{{-- O Modal de confirmação pode ser mantido ou estilizado posteriormente --}}
 @endsection

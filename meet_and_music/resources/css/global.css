@@ -3,35 +3,35 @@
   --primary-color: #FF5500;
   --secondary-color: #00B8D4;
   --accent-color: #8E2DE2;
-  
+
   /* Gradientes */
   --gradient-primary: linear-gradient(135deg, #FF5500, #FF8C69);
   --gradient-dark: linear-gradient(135deg, #111111, #333333);
   --gradient-blue: linear-gradient(135deg, #00B8D4, #0052CC);
-  
+
   /* Cores neutras */
   --background-color: #111111;
   --surface-color: #222222;
   --text-color: #FFFFFF;
   --text-light: rgba(255, 255, 255, 0.8);
   --border-color: rgba(255, 255, 255, 0.1);
-  
+
   /* Cores de feedback */
   --success-color: #4CAF50;
   --error-color: #F44336;
   --warning-color: #FFC107;
-  
+
   /* Sombras */
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  
+
   /* Bordas */
   --border-radius-sm: 4px;
   --border-radius: 8px;
   --border-radius-lg: 12px;
   --border-radius-xl: 20px;
-  
+
   /* Tipografia */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-xs: 0.75rem;
@@ -43,7 +43,7 @@
   --font-size-3xl: 2rem;
   --font-size-4xl: 3rem;
   --font-size-5xl: 4rem;
-  
+
   /* Espaçamento */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
@@ -51,7 +51,7 @@
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-2xl: 4rem;
-  
+
   /* Container */
   --container-width: 1200px;
   --container-padding: 2rem;
@@ -70,12 +70,10 @@ html {
 }
 
 body {
-  font-family: var(--font-family);
-  font-size: var(--font-size-base);
-  line-height: 1.5;
-  color: var(--text-color);
+  padding-bottom: 60px;
+  font-family: 'Inter', sans-serif;
   background-color: var(--background-color);
-  -webkit-font-smoothing: antialiased;
+  color: var(--text-color);
 }
 
 /* Layout */
@@ -104,13 +102,15 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-sm) var(--spacing-lg);
-  border-radius: 3px;
-  font-size: var(--font-size-lg);
+  padding: 0.6rem var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: none;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -207,4 +207,16 @@ a {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-} 
+}
+
+footer, .footer {
+  position: fixed !important;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  z-index: 99;
+  margin: 0 !important;
+  max-width: none !important;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}

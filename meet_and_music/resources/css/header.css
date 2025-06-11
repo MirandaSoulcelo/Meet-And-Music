@@ -1,0 +1,118 @@
+/* public/css/header.css */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 72px; /* Altura fixa para o cabeçalho */
+    z-index: 100;
+    background: rgba(15, 15, 19, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.header-content {
+    width: 100%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm); /* Espaçamento consistente entre os links */
+}
+
+.nav-link {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: var(--font-size-base);
+    padding: var(--spacing-xs) var(--spacing-sm); /* Padding de 0.5rem vertical e 1rem horizontal */
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-profile-icon {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: var(--spacing-xs);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.nav-profile-icon:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: calc(100% + 10px); /* Posicionamento abaixo do ícone */
+    right: 0;
+    z-index: 110;
+    width: 180px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    padding: var(--spacing-xs) 0;
+    display: none; /* Alterado para 'none' para controle via JS com a classe 'hidden' */
+}
+
+.profile-dropdown.hidden {
+    display: none;
+}
+
+.profile-dropdown:not(.hidden) {
+    display: block;
+}
+
+.profile-dropdown button {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    text-align: left;
+    width: 100%;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+.profile-dropdown button:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+}
+
+/* Estilos para a Logo e Links da Navbar */
+
+.header-logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.header-logo .logo-meet {
+    color: var(--primary-color);
+}
+
+.nav-links .nav-link {
+    font-size: var(--font-size-base);
+}
