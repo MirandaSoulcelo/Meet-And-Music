@@ -55,6 +55,9 @@
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .module-title {
@@ -66,13 +69,12 @@
 }
 
 .module-level {
-    background: var(--primary-color);
-    opacity: 0.2;
-    color: var(--primary-color);
-    font-size: 0.75rem;
-    font-weight: 500;
+    background: rgba(255, 85, 0, 0.2);
+    color: var(--text-color);
     padding: 0.25rem 0.75rem;
-    border-radius: 9999px;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    font-weight: 500;
 }
 
 /* Lista de Módulos */
