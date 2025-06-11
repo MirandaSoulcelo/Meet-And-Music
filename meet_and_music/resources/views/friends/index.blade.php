@@ -10,7 +10,7 @@
             <p class="text-text-light mt-2">Use a busca na comunidade para encontrar novos amigos.</p>
         </div>
     @else
-        <div class="module-list mt-6">
+        <div class="module-list mt-8">
             @foreach($friendsWithMeetingStatus as $friendData)
                 {{-- Cada amigo agora é um "module-item" para herdar o estilo --}}
                 <div class="module-item">
@@ -28,22 +28,21 @@
                         @endif
                     </div>
 
-                    {{-- Container dos botões com largura fixa para garantir consistência --}}
-                    <div class="flex items-center gap-2" style="width: 280px;">
+                    {{-- Container dos botões agora usa CSS Grid para garantir colunas de tamanho igual --}}
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; width: 300px;">
                         @if($friendData['is_in_meeting'])
-                            {{-- Botão Conectar-se que cresce para preencher o espaço --}}
-                            <a href="{{ $friendData['meeting_link'] ?? '#' }}" class="btn btn-primary btn-sm" style="flex-grow: 1;">
-                                <i class="fas fa-phone mr-2"></i> Conectar-se
+                            <a href="{{ $friendData['meeting_link'] ?? '#' }}" class="btn btn-primary btn-sm w-full">
+                                Conectar-se
                             </a>
+                        @else
+                            <div></div>
                         @endif
 
-                        {{-- Formulário de remoção que cresce para preencher o espaço --}}
-                        <form action="{{ route('friends.remove', $friendData['user']->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover {{ $friendData['user']->name }} da sua lista de amigos?');" style="flex-grow: 1;">
+                        <form action="{{ route('friends.remove', $friendData['user']->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover {{ $friendData['user']->name }} da sua lista de amigos?');">
                             @csrf
                             @method('DELETE')
-                            {{-- Botão Remover agora com texto e ocupando 100% da largura do formulário --}}
-                            <button type="submit" class="btn btn-outline btn-sm" style="width: 100%;">
-                                <i class="fas fa-user-minus mr-2"></i> Remover
+                            <button type="submit" class="btn btn-outline btn-sm w-full">
+                                Remover
                             </button>
                         </form>
                     </div>
