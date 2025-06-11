@@ -28,19 +28,22 @@
                         @endif
                     </div>
 
-                    <div class="flex items-center gap-2">
+                    {{-- Container dos botões com largura fixa para garantir consistência --}}
+                    <div class="flex items-center gap-2" style="width: 280px;">
                         @if($friendData['is_in_meeting'])
-                            <a href="{{ $friendData['meeting_link'] ?? '#' }}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-phone"></i> Conectar-se
+                            {{-- Botão Conectar-se que cresce para preencher o espaço --}}
+                            <a href="{{ $friendData['meeting_link'] ?? '#' }}" class="btn btn-primary btn-sm" style="flex-grow: 1;">
+                                <i class="fas fa-phone mr-2"></i> Conectar-se
                             </a>
                         @endif
 
-                        {{-- Formulário para remover amigo --}}
-                        <form action="{{ route('friends.remove', $friendData['user']->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover {{ $friendData['user']->name }} da sua lista de amigos?');">
+                        {{-- Formulário de remoção que cresce para preencher o espaço --}}
+                        <form action="{{ route('friends.remove', $friendData['user']->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja remover {{ $friendData['user']->name }} da sua lista de amigos?');" style="flex-grow: 1;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-outline btn-sm">
-                                <i class="fas fa-user-minus"></i>
+                            {{-- Botão Remover agora com texto e ocupando 100% da largura do formulário --}}
+                            <button type="submit" class="btn btn-outline btn-sm" style="width: 100%;">
+                                <i class="fas fa-user-minus mr-2"></i> Remover
                             </button>
                         </form>
                     </div>
