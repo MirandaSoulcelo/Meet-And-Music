@@ -4,6 +4,7 @@
 
 /* Globais e Variáveis */
 @import 'global.css';
+@import 'auth.css';
 
 /* Layout */
 @import 'header.css';
