@@ -1,34 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-{{-- Card principal que envolve toda a seção --}}
+{{-- Card principal que envolve toda a seção, usando o mesmo estilo da página de lições --}}
 <div class="content-card">
     {{-- Cabeçalho do Card: Título e Botão "Nova Chamada" --}}
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <div class="flex justify-between items-center mb-6">
         <h1 class="card-title" style="margin-bottom: 0; border-bottom: none;">Minhas Videochamadas</h1>
-        {{-- O botão para abrir o modal pode ser estilizado com as classes do projeto --}}
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#criarMeetingModal">
             Nova Chamada
         </button>
     </div>
 
-    {{-- Grid para os cards das chamadas --}}
+    {{-- Lista de itens, usando a mesma classe da lista de módulos --}}
     @if($meetings->count() > 0)
-        <div class="meetings-grid">
+        <div class="module-list">
             @foreach($meetings as $meeting)
-                {{-- Card individual para cada chamada --}}
-                <div class="meeting-card">
-                    <div>
-                        <p class="meeting-title">
+                {{-- Cada chamada agora é um "module-item" para herdar o estilo --}}
+                <div class="module-item">
+                    <div class="module-item-content">
+                        <h3 class="module-item-title">{{ $meeting->title }}</h3>
+                        <p class="module-item-description">
                             Criada em {{ $meeting->created_at->format('d/m/Y H:i') }}
                         </p>
-                        <h5 class="meeting-description">{{ $meeting->title }}</h5>
                     </div>
-                    <div class="meeting-actions">
-                        <a href="{{ route('meeting.video.call', $meeting->room_id) }}" class="btn btn-primary btn-sm" style="flex-grow: 1;">
+                    <div class="flex items-center gap-2">
+                        <a href="{{ route('meeting.video.call', $meeting->room_id) }}" class="btn btn-primary btn-sm">
                             Entrar
                         </a>
-                        <button class="btn btn-secondary btn-sm" onclick="compartilhar('{{ $meeting->room_id }}')" style="flex-grow: 1;">
+                        <button class="btn btn-secondary btn-sm" onclick="compartilhar('{{ $meeting->room_id }}')">
                             Compartilhar
                         </button>
                     </div>
@@ -37,9 +36,9 @@
         </div>
     @else
         {{-- Mensagem para quando não há chamadas --}}
-        <div class="empty-state">
-            <h5 class="empty-state-title">Nenhuma videochamada criada ainda</h5>
-            <p class="empty-state-text">Clique em "Nova Chamada" para começar.</p>
+        <div class="text-center py-8">
+            <h5 class="text-lg font-semibold">Nenhuma videochamada criada ainda</h5>
+            <p class="text-text-light mt-2">Clique em "Nova Chamada" para começar.</p>
         </div>
     @endif
 </div>

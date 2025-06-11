@@ -237,3 +237,50 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
+
+/* Estilos Corrigidos e Unificados para Itens em Lista (Módulos, Chamadas, etc.) */
+
+.item-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espaçamento de 16px entre os itens da lista */
+}
+
+/* Estilo principal unificado para cada card de item */
+.item-card {
+    background: var(--background-color);
+    border-radius: var(--border-radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease-in-out;
+    display: flex; /* Ativa o Flexbox */
+    justify-content: space-between; /* Alinha o conteúdo à esquerda e o botão à direita */
+    align-items: center; /* Centraliza verticalmente os itens */
+    gap: 1.5rem; /* Adiciona um espaço entre o texto e o botão */
+    text-decoration: none;
+    color: inherit;
+}
+
+.item-card:hover {
+    transform: translateY(-4px); /* Efeito de elevação */
+    border-color: var(--primary-color);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Container para o conteúdo de texto do item */
+.item-card-content {
+    flex-grow: 1; /* Permite que o texto ocupe o espaço disponível */
+}
+
+.item-card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.item-card-description {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    max-width: 80ch; /* Limita a largura do texto para melhor legibilidade */
+}
