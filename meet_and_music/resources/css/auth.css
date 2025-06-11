@@ -1,32 +1,17 @@
-/* resources/css/auth.css */
+/* resources/css/auth.css - Versão Simplificada para Formulário Centralizado */
 
 .auth-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    min-height: calc(100vh - 72px);
-    width: 100vw;
-    max-width: 100%;
-    margin-left: calc(-50vw + 50%);
-}
-
-@media (min-width: 1024px) {
-    .auth-container {
-        grid-template-columns: 45% 55%;
-    }
-}
-
-.auth-form-section {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-xl);
-    background-color: var(--background-color);
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    min-height: calc(100vh - 72px);
+    padding: var(--spacing-lg);
 }
 
 .auth-card {
     width: 100%;
     max-width: 450px;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
     background-color: var(--surface-color);
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--border-color);
@@ -111,6 +96,8 @@
     display: none;
     background-size: cover;
     background-position: center;
+    border-radius: var(--border-radius-xl);
+    margin: var(--spacing-lg);
 }
 
 @media (min-width: 1024px) {

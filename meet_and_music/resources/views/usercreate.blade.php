@@ -39,9 +39,5 @@
             </form>
         </div>
     </div>
-
-    {{-- Seção da Imagem (Direita) --}}
-    <div class="auth-image-section" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=2070&auto=format&fit=crop');">
-    </div>
 </div>
 @endsection

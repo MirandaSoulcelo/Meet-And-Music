@@ -102,8 +102,8 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--spacing-xs) var(--spacing-lg);
-  border-radius: var(--border-radius-lg);
+  padding: 0.6rem var(--spacing-md);
+  border-radius: var(--border-radius);
   font-size: var(--font-size-base);
   font-weight: 600;
   text-decoration: none;
