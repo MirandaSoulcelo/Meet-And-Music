@@ -124,9 +124,8 @@
 }
 
 .module-status.complete {
-    background: var(--success-color);
-    opacity: 0.2;
-    color: var(--success-color);
+    background: rgba(76, 175, 80, 0.2);
+    color: var(--text-color);
 }
 
 .module-status.locked {
@@ -258,7 +257,7 @@
     display: flex; /* Ativa o Flexbox */
     justify-content: space-between; /* Alinha o conteúdo à esquerda e o botão à direita */
     align-items: center; /* Centraliza verticalmente os itens */
-    gap: 1.5rem; /* Adiciona um espaço entre o texto e o botão */
+    gap: 26px; /* Aumenta o espaçamento entre o ícone e o texto */
     text-decoration: none;
     color: inherit;
 }
