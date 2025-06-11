@@ -48,7 +48,7 @@
 
 /* Hero Section */
 .hero-section {
-    padding-top: 120px;
+    padding-top: 0.5em;
     min-height: 10vh;
     display: flex;
     align-items: center;
