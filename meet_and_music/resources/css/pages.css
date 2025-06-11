@@ -1,0 +1,133 @@
+/* resources/css/pages.css */
+
+/* Card principal que envolve o conteúdo da página */
+.content-card {
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-xl); /* 20px */
+    padding: var(--spacing-lg); /* 2rem */
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Título padrão para os cards */
+.card-title {
+    font-size: var(--font-size-2xl); /* 1.5rem */
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+/* Grid para cards de conteúdo */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* Card individual para itens */
+.item-card {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Título do item card */
+.item-card-title {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Texto secundário do item card */
+.item-card-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-light);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Container de botões do item card */
+.item-card-actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-top: auto;
+}
+
+/* Mensagem de estado vazio */
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+}
+
+.empty-state-title {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xs);
+}
+
+.empty-state-text {
+    color: var(--text-light);
+}
+
+/* Linha divisória para itens de uma lista dentro de um card */
+.card-item-list > * + * {
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Container do grid para as chamadas */
+.meetings-grid {
+    display: grid;
+    /* Cria colunas que se ajustam, com um tamanho mínimo de 300px */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* Espaçamento de 20px entre os cards */
+    margin-top: 1.5rem;
+    justify-content: center; /* Centraliza os cards na grade */
+}
+
+/* Estilo do card individual para cada videochamada */
+.meeting-card {
+    /* Usa a cor de superfície para se destacar do fundo do card principal */
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-lg); /* Borda de 12px */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md); /* Sombra para o efeito "floating" */
+    transition: all 0.2s ease-in-out;
+}
+
+.meeting-card:hover {
+    transform: translateY(-4px); /* Efeito de elevação ao passar o mouse */
+    box-shadow: var(--shadow-lg);
+}
+
+/* Título da chamada com fonte de 12px */
+.meeting-card .meeting-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase; /* Deixa o título mais estilizado */
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+
+.meeting-card .meeting-description {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.meeting-card .meeting-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: auto; /* Garante que os botões fiquem sempre na base do card */
+}
